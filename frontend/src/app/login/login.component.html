@@ -1,0 +1,19 @@
+<div class="login-page animate">
+	<div class="row">
+		<div class="col-lg-4 col-lg-offset-4">
+			<h1>AirFlights <small>Free Edition</small></h1>
+			<form role="form" (ngSubmit)="login()">
+				<div class="form-content">
+					<div class="form-group">
+						<input type="email" id="email" required [(ngModel)]="user.email" name="email" class="form-control input-underline input-lg" id="" placeholder="Email">
+					</div>
+					<div class="form-group">
+            			<input name="password" [(ngModel)]="user.password" type="password" id="inputPassword" class="form-control input-underline input-lg"  placeholder="Password" required>
+					</div>
+				</div>
+				<button class="btn rounded-btn"> Log in </button>
+			</form><br>
+
+		</div>	
+	</div>
+</div>
