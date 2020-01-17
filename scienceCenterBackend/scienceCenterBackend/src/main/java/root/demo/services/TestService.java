@@ -9,6 +9,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.form.FormField;
 import org.camunda.bpm.engine.identity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import root.demo.model.FormSubmissionDto;
@@ -23,6 +24,9 @@ public class TestService implements JavaDelegate{
 	
 	@Autowired
 	UserRepository repo;
+	
+	@Autowired
+    PasswordEncoder encoder;
 	
 	//inicijalno ovaj servis sluzi za proveru da li korisnik vec postoji u sistemu
 	@Override
@@ -65,7 +69,8 @@ public class TestService implements JavaDelegate{
 					continue;
 				}
 				if(formField.getFieldId().equals("password")) {
-					myuser.setPassword(formField.getFieldValue());
+					myuser.setPassword(encoder.encode(formField.getFieldValue()));
+					//myuser.setPassword(formField.getFieldValue());
 					continue;
 				}
 				if(formField.getFieldId().equals("mail")) {

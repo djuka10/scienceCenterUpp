@@ -43,6 +43,9 @@ public class Magazine {
 	@ManyToMany
 	private Set<MyUser> reviewers;//recenzenti
 	
+	@ManyToMany
+	private Set<MyUser> editors; //urednici
+	
 	
 	
 	public Magazine() {
@@ -86,6 +89,30 @@ public class Magazine {
 		this.reviewers = reviewers;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
+	public Set<MyUser> getEditors() {
+		return editors;
+	}
+
+
+
+	public void setEditors(Set<MyUser> editors) {
+		this.editors = editors;
+	}
+
+
+
 	public String getName() {
 		return name;
 	}

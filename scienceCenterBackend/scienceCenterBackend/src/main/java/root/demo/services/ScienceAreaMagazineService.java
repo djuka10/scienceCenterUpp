@@ -40,7 +40,8 @@ public class ScienceAreaMagazineService implements JavaDelegate {
 		 for (FormSubmissionDto formField : sciencearea) {
 			 if(formField.getFieldId().equals("naucnaOblast")) {
 				 for (ScienceArea scienceArea2 : lista) {
-					if(scienceArea2.getScienceAreaName().equals(formField.getFieldValue())) {
+					 Long pom = Long.parseLong(formField.getFieldValue()) + 1;
+					if(scienceArea2.getId() == pom) {
 						 magazine.getScienceAreas().add(scienceArea2);
 						 break;
 					}

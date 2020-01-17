@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../services/auth/token-storage.service';
 import { Globals } from './../guard/globals';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RepositoryService } from './../services/repository/repository.service';
@@ -35,7 +36,8 @@ export class ActivateuserComponent implements OnInit {
     private repositoryService : RepositoryService, 
     private router: Router,
     private route: ActivatedRoute,
-    private globals: Globals) { 
+    private globals: Globals,
+    private tokenStorage: TokenStorageService) { 
 
       this.proccesInstanceTemp = this.route.snapshot.params.id;
 
@@ -58,7 +60,8 @@ export class ActivateuserComponent implements OnInit {
               this.globals.globalTaskId = l.taskId;
             }
             alert("TaskId: " + this.globals.globalTaskId);
-            this.router.navigate(['/submitReviewer/' + this.globals.globalTaskId]);
+            this.tokenStorage.saveTaskId(this.globals.globalTaskId);
+           // this.router.navigate(['/submitReviewer/' + this.globals.globalTaskId]);
 
           })
 

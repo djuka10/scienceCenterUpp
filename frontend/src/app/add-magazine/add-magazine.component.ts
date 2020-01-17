@@ -83,14 +83,23 @@ export class AddMagazineComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  field1;
+
   onSubmit(value, form){
     let o = new Array();
     for (var property in value) {
       console.log(property);
       console.log(value[property]);
-      o.push({fieldId : property, fieldValue : value[property]});
-    }
 
+      
+
+        o.push({fieldId : property, fieldValue : value[property]});
+
+      
+
+    }
+  o.push({fieldId: "nacinNaplate", fieldValue: this.field1});
     o.push({fieldId: "mail", fieldValue: this.authUsername});
 
     console.log(o);

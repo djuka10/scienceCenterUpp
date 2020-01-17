@@ -128,8 +128,8 @@ export class AddEditorReviewerComponent implements OnInit {
             this.globals.globalTaskId = l.taskId;
           }
 
-          this.router.navigate(['/']);
-          window.location.reload();
+         // this.router.navigate(['/']);
+        //  window.location.reload();
         //  this.router.navigate(['/admin/confirmMagazine/' + this.globals.globalTaskId]);
       })
         

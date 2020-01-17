@@ -13,6 +13,7 @@ export class AppComponent {
   private role = localStorage.getItem('role');
 
   userLogged: Boolean = false;
+  userLogged2: Boolean;
   userAdmin: Boolean = false;
   authorities: String[];
 
@@ -30,6 +31,14 @@ export class AppComponent {
       this.userAdmin = true;
     } else {
       this.userAdmin = false;
+    }
+
+    if(this.tokenStorage.getUser() != null) {
+      alert("TRU")
+      this.userLogged2 = true;
+    } else {
+      alert("FAL")
+      this.userLogged2 = false;
     }
 
 
@@ -63,5 +72,6 @@ export class AppComponent {
   logout() {
     this.tokenStorage.signOut();
     this.router.navigate(['/']);
+    window.location.reload();
   }
 }

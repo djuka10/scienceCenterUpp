@@ -8,5 +8,5 @@ import root.demo.model.repo.*;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
-
+	
 }

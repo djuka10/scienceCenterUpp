@@ -27,13 +27,22 @@ public class MagazineDataService implements JavaDelegate{
 		// TODO Auto-generated method stub
 		List<FormSubmissionDto> magazine = (List<FormSubmissionDto>)execution.getVariable("magazine");
 	      System.out.println(magazine);
+	      String mail = "";
+	      Boolean update = false;
+	      
 	      
 	      for (FormSubmissionDto formField : magazine) {
-				if(formField.getFieldId().equals("ISSN")) {
+				if(formField.getFieldId().equals("IssnBr")) {
 					Magazine mag = repo.findByusername(formField.getFieldValue());
 					if(mag != null) {
+						updateMagazine(mag,magazine);
+						//idemo u izmenu
+						
+						update = true;
+						execution.setVariable("issn", mag.getusername()); //moracemo znati kasnije kojem casopisu dodeljujemo urednike i recenzente
+						
 						execution.setVariable("magexist", false);
-						return;
+						break;
 					} else {
 						execution.setVariable("magexist", true);
 						break;
@@ -41,35 +50,69 @@ public class MagazineDataService implements JavaDelegate{
 				}
 	      }
 	      
-	      Magazine m = new Magazine();
 	      
-	      String mail = "";
-	      
-	      
-	      for (FormSubmissionDto formField : magazine) {
-	    	  if(formField.getFieldId().equals("IssnBr")) {
-					m.setusername(formField.getFieldValue());
-					continue;
+	      if(update) {
+	    	  for (FormSubmissionDto formField : magazine) {
+	    		  if(formField.getFieldId().equals("mail")) {
+					  mail = formField.getFieldValue();
+				  }
+		    	  execution.setVariable("mail", mail);
 	    	  }
-	    	  if(formField.getFieldId().equals("Naziv")) {
-					m.setName(formField.getFieldValue());
-					continue;
-	    	  }
-	    	  if(formField.getFieldId().equals("nacinNaplate")) {
-					m.setKindOfPay(formField.getFieldValue());
-					continue;
-	    	  }
-	    	  if(formField.getFieldId().equals("mail")) {
-	    		  mail = formField.getFieldValue();
-	    	  }
+	    	  
+	    	  
+	    	  
+	      } else {
+	    	  Magazine m = new Magazine();
+
+		      for (FormSubmissionDto formField : magazine) {
+		    	  if(formField.getFieldId().equals("IssnBr")) {
+						m.setusername(formField.getFieldValue());
+						continue;
+		    	  }
+		    	  if(formField.getFieldId().equals("Naziv")) {
+						m.setName(formField.getFieldValue());
+						continue;
+		    	  }
+		    	  if(formField.getFieldId().equals("nacinNaplate")) {
+						m.setKindOfPay(formField.getFieldValue());
+						continue;
+		    	  }
+		    	  if(formField.getFieldId().equals("mail")) {
+		    		  mail = formField.getFieldValue();
+		    	  }
+		      }
+		      m.setActive(false);
+		      
+		      execution.setVariable("issn", m.getusername()); //moracemo znati kasnije kojem casopisu dodeljujemo urednike i recenzente
+		      execution.setVariable("mail", mail);
+		      repo.save(m);
+		      //Nekako treba pamtiti ko je glavni urednik casopisa
+		      //m.setChiefEditor(chiefEditor);
 	      }
-	      m.setActive(false);
 	      
-	      execution.setVariable("issn", m.getusername()); //moracemo znati kasnije kojem casopisu dodeljujemo urednike i recenzente
-	      execution.setVariable("mail", mail);
-	      repo.save(m);
-	      //Nekako treba pamtiti ko je glavni urednik casopisa
-	      //m.setChiefEditor(chiefEditor);
+	     
+		
+	}
+	
+	public void updateMagazine(Magazine mag, List<FormSubmissionDto> lista) {
+		
+		 for (FormSubmissionDto formField : lista) {
+			 if(formField.getFieldId().equals("IssnBr")) {
+					mag.setusername(formField.getFieldValue());
+					continue;
+	    	  }
+			 if(formField.getFieldId().equals("Naziv")) {
+					mag.setName(formField.getFieldValue());
+					continue;
+			  }
+			  if(formField.getFieldId().equals("nacinNaplate")) {
+				  mag.setKindOfPay(formField.getFieldValue());
+					continue;
+			  }
+			  
+		 }
+		 mag.setActive(false);
+		 repo.save(mag);
 		
 	}
 

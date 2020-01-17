@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../services/auth/token-storage.service';
 import { Globals } from './../guard/globals';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RepositoryService } from './../services/repository/repository.service';
@@ -32,12 +33,14 @@ export class SubmitReviewerComponent implements OnInit {
     private repositoryService : RepositoryService, 
     private router: Router,
     private globals: Globals,
-    private route: ActivatedRoute) { 
+    private route: ActivatedRoute,
+    private tokenStorage: TokenStorageService) { 
 
+      alert("TOKEN TASK ID: " + this.tokenStorage.getTaskId());
       alert("ID: " + this.route.snapshot.params.id );
       this.globalTaskId = this.route.snapshot.params.id;
 
-      let x = this.repositoryService.getUserTask(this.globalTaskId);
+      let x = this.repositoryService.getUserTask(this.tokenStorage.getTaskId());
 
             x.subscribe(
               res => {

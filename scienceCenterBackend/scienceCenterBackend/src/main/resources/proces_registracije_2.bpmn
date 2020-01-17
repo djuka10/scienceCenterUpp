@@ -69,38 +69,38 @@
     <bpmn:userTask id="Task_0p0yvdz" name="Unos osnovnih podataka" camunda:assignee="${inicijator}" camunda:candidateGroups="gosti">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="ime" label="Ime" type="string">
+          <camunda:formField id="ime" label="Ime*" type="string">
             <camunda:validation>
               <camunda:constraint name="required" />
             </camunda:validation>
           </camunda:formField>
-          <camunda:formField id="prezime" label="Prezime" type="string">
+          <camunda:formField id="prezime" label="Prezime*" type="string">
             <camunda:validation>
               <camunda:constraint name="required" />
             </camunda:validation>
           </camunda:formField>
-          <camunda:formField id="username" label="Korisnicko ime" type="string">
+          <camunda:formField id="username" label="Korisnicko ime*" type="string">
             <camunda:validation>
               <camunda:constraint name="required" />
               <camunda:constraint name="maxlength" config="20" />
             </camunda:validation>
           </camunda:formField>
-          <camunda:formField id="password" label="Lozinka" type="string">
+          <camunda:formField id="password" label="Lozinka*" type="string">
             <camunda:validation>
               <camunda:constraint name="required" />
             </camunda:validation>
           </camunda:formField>
-          <camunda:formField id="mail" label="E-mail" type="string">
+          <camunda:formField id="mail" label="E-mail*" type="string">
             <camunda:validation>
               <camunda:constraint name="required" />
             </camunda:validation>
           </camunda:formField>
-          <camunda:formField id="drzava" label="Drzava:" type="string">
+          <camunda:formField id="drzava" label="Drzava:*" type="string">
             <camunda:validation>
               <camunda:constraint name="required" />
             </camunda:validation>
           </camunda:formField>
-          <camunda:formField id="grad" label="Grad:" type="string">
+          <camunda:formField id="grad" label="Grad:*" type="string">
             <camunda:validation>
               <camunda:constraint name="required" />
             </camunda:validation>
