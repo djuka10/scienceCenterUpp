@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import root.demo.model.FormSubmissionDto;
+import root.demo.repository.RoleRepository;
 import root.demo.repository.UserRepository;
 import root.demo.model.repo.*;
 
@@ -27,6 +28,9 @@ public class TestService implements JavaDelegate{
 	
 	@Autowired
     PasswordEncoder encoder;
+	
+	@Autowired
+	RoleRepository roleRepo;
 	
 	//inicijalno ovaj servis sluzi za proveru da li korisnik vec postoji u sistemu
 	@Override
@@ -108,6 +112,19 @@ public class TestService implements JavaDelegate{
 				
 					
 		      }
+	      
+	      List<Role> lista = roleRepo.findAll();
+			Role r = new Role();
+			
+			for (Role role : lista) {
+				if(role.getName().equals(RoleName.ROLE_USER)) {
+					r = role;
+					break;
+				}
+			}
+	      
+	      myuser.getRoles().add(r);
+	      myuser.setRole(r);
 	      myuser.setActivate(false);
 	      execution.setVariable("mail", myuser.getMail());
 	      
