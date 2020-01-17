@@ -51,8 +51,19 @@ export class ActivateuserComponent implements OnInit {
         this.userService.registerUser(o,this.globals.globalTaskId).subscribe(data => {
           //submitovao
           alert("Aktivirao korisnika");
+
+          let x = this.repositoryService.getTasks(this.proccesInstanceTemp).subscribe(data => {
+            this.lista = data;
+            for(let l of this.lista) {
+              this.globals.globalTaskId = l.taskId;
+            }
+            alert("TaskId: " + this.globals.globalTaskId);
+            this.router.navigate(['/submitReviewer/' + this.globals.globalTaskId]);
+
+          })
+
           
-          this.router.navigate(['/submitReviewer/' + this.globals.globalTaskId]);
+         
 
         })
 

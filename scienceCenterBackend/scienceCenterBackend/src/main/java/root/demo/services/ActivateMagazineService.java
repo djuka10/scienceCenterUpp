@@ -34,7 +34,6 @@ public class ActivateMagazineService implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		// TODO Auto-generated method stub
-		//MAJMUNCINO ZAVRSI OVO
 		List<FormSubmissionDto> confirmMagazine = (List<FormSubmissionDto>)execution.getVariable("confirmMagazine");
 		System.out.println(confirmMagazine);
 		

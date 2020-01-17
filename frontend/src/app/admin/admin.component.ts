@@ -39,11 +39,17 @@ export class AdminComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private route: ActivatedRoute) { 
 
-      this.globalTaskId = this.route.snapshot.params.id;
+    //  this.globalTaskId = this.route.snapshot.params.id;
 
-     
 
-      let x = this.repositoryService.getUserTask( this.globals.globalTaskId);
+     alert("TOKEN TASK ID: " + this.tokenStorage.getTaskId());
+
+     let temp = this.tokenStorage.getTaskId();
+     let sub = temp.substring(1,temp.length-1);
+
+     alert("substringovan TASK ID: " + sub);
+
+      let x = this.repositoryService.getUserTask(sub);
 
 
       x.subscribe(
@@ -122,7 +128,10 @@ export class AdminComponent implements OnInit {
           if(!this.checkboxFlag) { 
             this.router.navigate(['/add/magazine/'+ this.globals.globalTaskId]);
           } else {
+            this.router.navigate(['']);
+            this.tokenStorage.saveTaskId("kraj!!!");
             alert("Kraj procesa");
+            
           }
 
 

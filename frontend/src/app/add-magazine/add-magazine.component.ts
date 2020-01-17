@@ -49,7 +49,7 @@ export class AddMagazineComponent implements OnInit {
 
       this.globalTaskId = this.route.snapshot.params.id;
       let x;
-      if(this.globalTaskId = "1") {
+      if(this.globalTaskId == "1") {
         alert("Start process");
         x = repositoryService.startProcess("Proces_Dodavanja_Casopisa");
       } else {

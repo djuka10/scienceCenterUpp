@@ -34,6 +34,7 @@ export class SubmitReviewerComponent implements OnInit {
     private globals: Globals,
     private route: ActivatedRoute) { 
 
+      alert("ID: " + this.route.snapshot.params.id );
       this.globalTaskId = this.route.snapshot.params.id;
 
       let x = this.repositoryService.getUserTask(this.globalTaskId);

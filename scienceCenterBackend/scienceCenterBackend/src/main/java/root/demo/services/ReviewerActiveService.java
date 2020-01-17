@@ -30,6 +30,8 @@ public class ReviewerActiveService implements JavaDelegate{
 		
 		user.setReviewer(true);
 		
+		//moglo bi se dodati i u tabelu roles da je reviewer
+		
 		repo.save(user);
 		
 		

@@ -73,9 +73,14 @@ const Routes = [
     path: "add/magazine/addEditorReviewer/:id",
     component: AddEditorReviewerComponent,
     canActivate: [Notauthorized]
-  },
+  }/*,
   {
     path: "admin/confirmMagazine/:id",
+    component: AdminComponent,
+    canActivate: [Notauthorized]
+  }*/,
+  {
+    path: "admin/confirmMagazine",
     component: AdminComponent,
     canActivate: [Notauthorized]
   }

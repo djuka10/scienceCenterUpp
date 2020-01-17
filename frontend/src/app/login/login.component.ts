@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       }
 
       this.router.navigate(['']);
-
+      window.location.reload();
     })
   }
 

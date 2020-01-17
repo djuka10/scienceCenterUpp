@@ -4,5 +4,6 @@
   <a class="navbar-brand" [routerLink]="['/add/magazine/1']" *ngIf="userLogged">Add magazine</a> 
   <a class="navbar-brand" [routerLink]="['/admin/confirmMagazine']" *ngIf="userAdmin">Admin - get task</a> 
   <a class="navbar-brand" [routerLink]="['/login']" >Login</a>  
+  <a class="navbar-brand" (click)="logout()" >Sign out</a>  
 </nav>
 <router-outlet></router-outlet>

@@ -7,11 +7,7 @@
     <bpmn:userTask id="Task_0sokqeq" name="Unos podataka o novom casopisu" camunda:assignee="${inicijator}" camunda:candidateGroups="urednici">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="Naziv" label="Naziv casopisa" type="string">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
+          <camunda:formField id="Naziv" label="Naziv casopisa" type="string" />
           <camunda:formField id="IssnBr" label="ISSN broj:" type="long" />
           <camunda:formField id="nacinNaplate" label="Nacin naplate:" type="enum">
             <camunda:value id="val1" name="Autor placa kad objavljuje" />
@@ -30,10 +26,10 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0qnsh5s" sourceRef="Task_0sokqeq" targetRef="Task_0jt1usk" />
     <bpmn:sequenceFlow id="SequenceFlow_13euxqj" sourceRef="Task_0pdda6w" targetRef="ExclusiveGateway_0qu1hku" />
-    <bpmn:userTask id="Task_0pdda6w" name="Unos naucnih oblasti u casopisu" camunda:assignee="${inicijator}">
+    <bpmn:userTask id="Task_0pdda6w" name="Unos naučnih oblasti" camunda:assignee="${inicijator}">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="naucnaOblast" label="Naucna oblast:" type="string" />
+          <camunda:formField id="naucnaOblast" label="Naucna oblast:" type="enum" />
           <camunda:formField id="daLiSteZavrsili" label="Da li ste zavrsili?" type="boolean" />
         </camunda:formData>
       </bpmn:extensionElements>
@@ -181,7 +177,7 @@
         <di:waypoint x="290" y="530" />
         <di:waypoint x="290" y="360" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="795" y="428" width="90" height="146" />
+          <dc:Bounds x="735" y="487" width="90" height="146" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_0n63i6w_di" bpmnElement="EndEvent_0n63i6w" bioc:stroke="rgb(229, 57, 53)" bioc:fill="rgb(255, 205, 210)">

@@ -35,7 +35,11 @@ export class ScienceareaComponent implements OnInit {
       this.firstAttemp = globals.firstAttemp;
       this.globalTaskId = this.route.snapshot.params.id;
       
-      //alert("? " + this.globalTaskId);
+      
+      alert("KONSTRUKTOVAO GA");
+      alert("? " + this.globalTaskId);
+      //Otkomentarisati kasnije
+      //window.location.reload();
      // alert("FirstAtt: " + this.globals.firstAttemp);
 
       //idemo u getUserTask samo ako prvi put pokrecemo proces
@@ -126,6 +130,11 @@ export class ScienceareaComponent implements OnInit {
             }
           }
 
+          if(this.checkboxFlag == undefined) {
+            this.checkboxFlag = false;
+            alert("Vise nije undefined? : " + this.checkboxFlag);
+          }
+
           let pom = this.route.snapshot.url.join('/');
           alert("POM: " + pom);
           console.log(pom);
@@ -133,17 +142,28 @@ export class ScienceareaComponent implements OnInit {
 
           //ovde treba napraviti if logiku za razlikovanje registracije od dodavanja magazina
           if(!this.checkboxFlag) {
+            alert("FALSE");
             if(pom.includes('magazine')) {
               this.router.navigate(['/add/magazine/sciencearea/' + this.globals.globalTaskId]);
-            } else 
+              alert("Magazine");
+              //window.location.reload();
+            } else {
               this.router.navigate(['/registrate/sciencearea/' + this.globals.globalTaskId]);
-            
+              alert("Registrate");
+              //window.location.reload();
+            }
+             
             //  window.location.reload();
           } else {
+            alert("TRUE");
             if(pom.includes('magazine')) { 
               this.router.navigate(['/add/magazine/addEditorReviewer/' + this.globals.globalTaskId]);
-            } else 
+              //alert("Magazine");
+              //window.location.reload();
+            } else {
               alert("Cekam potvrdu na mejlu!")
+            }
+              
             //this.router.navigate(['/verification/' + this.processInstance]);
           }
 

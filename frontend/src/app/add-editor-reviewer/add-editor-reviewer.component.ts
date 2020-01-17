@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../services/auth/token-storage.service';
 import { Globals } from './../guard/globals';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RepositoryService } from './../services/repository/repository.service';
@@ -42,7 +43,8 @@ export class AddEditorReviewerComponent implements OnInit {
     private repositoryService : RepositoryService, 
     private router: Router,
     private globals: Globals,
-    private route: ActivatedRoute) { 
+    private route: ActivatedRoute,
+    private tokenService: TokenStorageService) { 
       this.globalTaskId = this.route.snapshot.params.id;
 
 
@@ -122,10 +124,13 @@ export class AddEditorReviewerComponent implements OnInit {
       this.repositoryService.getTasks(this.processInstance).subscribe( data => { 
           this.lista = data;
           for(let l of this.lista) {
+            this.tokenService.saveTaskId(l.taskId);
             this.globals.globalTaskId = l.taskId;
           }
 
-          this.router.navigate(['/admin/confirmMagazine/' + this.globals.globalTaskId]);
+          this.router.navigate(['/']);
+          window.location.reload();
+        //  this.router.navigate(['/admin/confirmMagazine/' + this.globals.globalTaskId]);
       })
         
 /*

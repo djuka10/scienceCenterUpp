@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { TokenStorageService } from './services/auth/token-storage.service';
 import { Component } from '@angular/core';
 
@@ -15,7 +16,8 @@ export class AppComponent {
   userAdmin: Boolean = false;
   authorities: String[];
 
-  constructor(private tokenStorage: TokenStorageService) {
+  constructor(private tokenStorage: TokenStorageService,
+    private router: Router) {
     this.authorities = tokenStorage.getAuthorities();
     if(this.authorities.includes("ROLE_EDITOR")) {
       this.userLogged = true;
@@ -56,5 +58,10 @@ export class AppComponent {
     }else{
       return false;
     }
+  }
+
+  logout() {
+    this.tokenStorage.signOut();
+    this.router.navigate(['/']);
   }
 }

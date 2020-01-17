@@ -5,6 +5,8 @@ const USERNAME_KEY = 'AuthUsername';
 const AUTHORITIES_KEY = 'AuthAuthorities';
 const USER_KEY = 'AuthUser;';
 const RESERVED = 'Reserved;';
+const PROCESS_INSTANCE_ID = 'ProcessInstanceId';
+const TASK_ID = 'TaskId';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,10 @@ export class TokenStorageService {
   constructor() { }
 
   public signOut() {
+    let temp = this.getTaskId();
     window.sessionStorage.clear();
+    this.saveTaskIdWithSignOut(temp);
+
   }
 
   public saveToken(token: string) {
@@ -68,6 +73,29 @@ export class TokenStorageService {
 
   public getReserved() : string {
     return sessionStorage.getItem(RESERVED);
+  }
+
+  public saveProcessInstanceId(process_instance_id : string) {
+    window.sessionStorage.removeItem(PROCESS_INSTANCE_ID);
+    window.sessionStorage.setItem(PROCESS_INSTANCE_ID, JSON.stringify(process_instance_id));
+  }
+
+  public getProccessInstanceId() : string {
+    return sessionStorage.getItem(PROCESS_INSTANCE_ID);
+  }
+
+  public saveTaskId(task_id : string) {
+    window.sessionStorage.removeItem(TASK_ID);
+    window.sessionStorage.setItem(TASK_ID, JSON.stringify(task_id));
+  }
+
+  public saveTaskIdWithSignOut(task_id : string) {
+    window.sessionStorage.removeItem(TASK_ID);
+    window.sessionStorage.setItem(TASK_ID, task_id);
+  }
+
+  public getTaskId() : string {
+    return sessionStorage.getItem(TASK_ID);
   }
 
 }
