@@ -43,7 +43,7 @@ public class ScienceAreaService implements JavaDelegate{
 			 if(formField.getFieldId().equals("naucnaOblast")) {
 				 for (ScienceArea scienceArea2 : lista) {
 					 Long pom = Long.parseLong(formField.getFieldValue()) + 1;
-					if(scienceArea2.getId() == pom) {
+					if(scienceArea2.getScienceAreaId() == pom) {
 						 user.getScienceArea().add(scienceArea2);
 						 break;
 					}

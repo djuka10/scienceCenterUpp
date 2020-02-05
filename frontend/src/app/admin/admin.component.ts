@@ -42,12 +42,12 @@ export class AdminComponent implements OnInit {
     //  this.globalTaskId = this.route.snapshot.params.id;
 
 
-     alert("TOKEN TASK ID: " + this.tokenStorage.getTaskId());
+     //alert("TOKEN TASK ID: " + this.tokenStorage.getTaskId());
 
      let temp = this.tokenStorage.getTaskId();
      let sub = temp.substring(1,temp.length-1);
 
-     alert("substringovan TASK ID: " + sub);
+     //alert("substringovan TASK ID: " + sub);
 
       let x = this.repositoryService.getUserTask(sub);
 

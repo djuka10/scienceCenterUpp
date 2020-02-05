@@ -48,8 +48,11 @@ export class LoginComponent implements OnInit {
         this.roles = this.tokenStorage.getAuthorities();
       }
 
-      this.router.navigate(['']);
-      window.location.reload();
+      this.router.navigate(['']).then(() => {
+        window.location.reload();
+      });
+      
+
     })
   }
 

@@ -39,7 +39,7 @@ public class MagazineDataService implements JavaDelegate{
 						//idemo u izmenu
 						
 						update = true;
-						execution.setVariable("issn", mag.getusername()); //moracemo znati kasnije kojem casopisu dodeljujemo urednike i recenzente
+						execution.setVariable("issn", mag.getUsername()); //moracemo znati kasnije kojem casopisu dodeljujemo urednike i recenzente
 						
 						execution.setVariable("magexist", false);
 						break;
@@ -66,7 +66,7 @@ public class MagazineDataService implements JavaDelegate{
 
 		      for (FormSubmissionDto formField : magazine) {
 		    	  if(formField.getFieldId().equals("IssnBr")) {
-						m.setusername(formField.getFieldValue());
+						m.setUsername(formField.getFieldValue());
 						continue;
 		    	  }
 		    	  if(formField.getFieldId().equals("Naziv")) {
@@ -74,7 +74,8 @@ public class MagazineDataService implements JavaDelegate{
 						continue;
 		    	  }
 		    	  if(formField.getFieldId().equals("nacinNaplate")) {
-						m.setKindOfPay(formField.getFieldValue());
+		    		  	
+						//m.setWayOfPayment((WayOfPayment) formField.getFieldValue());
 						continue;
 		    	  }
 		    	  if(formField.getFieldId().equals("mail")) {
@@ -83,7 +84,7 @@ public class MagazineDataService implements JavaDelegate{
 		      }
 		      m.setActive(false);
 		      
-		      execution.setVariable("issn", m.getusername()); //moracemo znati kasnije kojem casopisu dodeljujemo urednike i recenzente
+		      execution.setVariable("issn", m.getUsername()); //moracemo znati kasnije kojem casopisu dodeljujemo urednike i recenzente
 		      execution.setVariable("mail", mail);
 		      repo.save(m);
 		      //Nekako treba pamtiti ko je glavni urednik casopisa
@@ -98,7 +99,7 @@ public class MagazineDataService implements JavaDelegate{
 		
 		 for (FormSubmissionDto formField : lista) {
 			 if(formField.getFieldId().equals("IssnBr")) {
-					mag.setusername(formField.getFieldValue());
+					mag.setUsername(formField.getFieldValue());
 					continue;
 	    	  }
 			 if(formField.getFieldId().equals("Naziv")) {
@@ -106,7 +107,7 @@ public class MagazineDataService implements JavaDelegate{
 					continue;
 			  }
 			  if(formField.getFieldId().equals("nacinNaplate")) {
-				  mag.setKindOfPay(formField.getFieldValue());
+				  //mag.setKindOfPay(formField.getFieldValue());
 					continue;
 			  }
 			  

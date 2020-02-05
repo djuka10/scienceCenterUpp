@@ -48,9 +48,16 @@ public class AddEditorReviewer implements JavaDelegate {
 				mag.getEditors().add(user);
 				//zavrsiti kasnije ovo
 			} else if(formField.getFieldId().equals("dodavanjeUrednika2")) { 
-				
+				String mail = formField.getFieldValue().substring(1,formField.getFieldValue().length());
+				System.out.println("Mail: " + mail);
+				MyUser user = userRepo.findBymail(mail);
+				//mag.getEditorsByScienceArea().add(new EditorByScienceArea(1l,user));
+				mag.getEditors().add(user);
 			} else if(formField.getFieldId().equals("dodajRecenzenta1")) { 
-				
+				String mail = formField.getFieldValue().substring(1,formField.getFieldValue().length());
+				System.out.println("Mail: " + mail);
+				MyUser user = userRepo.findBymail(mail);
+				mag.getReviewers().add(user);
 			} else {
 				String mail = formField.getFieldValue().substring(1,formField.getFieldValue().length());
 				System.out.println("Mail: " + mail);

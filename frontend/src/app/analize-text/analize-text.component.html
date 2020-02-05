@@ -1,0 +1,61 @@
+<p>
+  analize-text works!
+</p>
+
+<h3>Basic</h3>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Title</th>
+                        <td>{{displayArticle.articleTitle}}</td>
+                    </tr>
+                    <tr>
+                        <th>Abstract</th>
+                        <textarea class="form-control" name="" id=""  rows="5">{{displayArticle.articleAbstract}}</textarea>
+                    </tr>
+                    <tr>
+                        <th>Science area</th>
+                        <td>Code {{displayArticle.scienceArea.scienceAreaCode}} , Name: {{displayArticle.scienceArea.scienceAreaName}}</td>
+                    </tr>
+                    <tr>
+                        <th>Author</th>
+                        <td>{{displayArticle.author.firstName}} {{displayArticle.author.lastName}}</td>
+                    </tr>
+                    <tr>
+                        <th>Key terms</th>
+                        <td><span *ngFor="let term of displayArticle.keyTerms" class="badge badge-primary ml-3">{{term.termName}}</span></td>
+                    </tr>
+                    <tr *ngIf="article">
+                        <th>
+                            File preview
+                        </th>
+                        <td>
+                            <!-- <a href="{{article.file.value.toString()}}" download ></a> -->
+                            <!-- <a [href]="article.file.toString()" download="proba.pdf" >Text</a>
+                            <a href="#" (click)="preview()" >Text</a> 
+                            <a [href]="fileUrl" download>DownloadFile</a>-->
+                            <!-- <iframe [src]="fileUrl" frameborder="0"></iframe>
+                            <object data=""></object> -->
+                        </td>
+                    </tr>
+                </table>
+
+
+
+                <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
+
+                  <div *ngFor="let field of formFields" >
+                      <label for={{field.id}}>{{field.label}}</label>
+                
+                      <input type="text" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id!='password'" >
+                      <input type="password" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id=='password'" >
+                      <input type="checkbox" name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
+                      <input type="number" name={{field.id}} ngModel  *ngIf="field.type.name=='long'">
+                      <select name="field.id" *ngIf="field.type.name=='enum'">
+                        <option *ngFor="let val of enumValues" value={{val}}>
+                          {{field.type.values[val]}}
+                        </option>
+                      </select>
+                  </div>
+                  
+                  <input type="submit">
+                </form>

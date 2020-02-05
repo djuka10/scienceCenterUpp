@@ -70,18 +70,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
 	
-	@Autowired
-	private UserRepository userRepository;
+		@Autowired
+		private UserRepository userRepository;
 	
-	 @Autowired
+	 	@Autowired
 	    AuthenticationManager authenticationManager;
-	 @Autowired
+	 	
+	 	@Autowired
 	    PasswordEncoder encoder;
 
 	    @Autowired
 	    JwtProvider jwtProvider;
+	    
+	    
+	    
+
 	
-	 @PostMapping("/login")
+	    @PostMapping("/login")
 	    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
 	    	System.out.println("DFKLJF " + loginRequest.getEmail());
@@ -102,6 +107,7 @@ public class UserController {
 	            String jwt = jwtProvider.generateJwtToken(authentication);
 	            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 	            Optional<MyUser> user = userRepository.findByMail(loginRequest.getEmail());
+	           
 	            
 	            return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), user.get().getId()));
 	    	} else {

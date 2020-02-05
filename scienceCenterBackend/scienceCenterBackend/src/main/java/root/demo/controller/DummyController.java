@@ -101,13 +101,9 @@ public class DummyController {
 		
 		if(task.getName().equals("Unos naučnih oblasti")) {
 			  List<ScienceArea> no = scienceRepo.findAll();
-			  
-		
+
 			  int i = 0;
-			  /*for (ScienceArea scienceArea : no) {
-				naucneOblasti.put(Integer.toString(i), scienceArea.getScienceAreaName());
-				i++;
-			  }*/
+
 			  
 			  for (FormField p : properties) {
 				if(p.getId().equals("naucnaOblast")) {
@@ -126,13 +122,7 @@ public class DummyController {
 			//ovde ce ici logika za ubacivanje enuma za urednike i recenzente
 			 List<MyUser> no = repo.findAll();
 			 int i = 0;
-			 
-			 
-			  
-			 
-			 for (FormField p : properties) {
-				 
-			 }
+			
 			 
 			 for (FormField p : properties) {
 				 

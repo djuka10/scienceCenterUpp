@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TokenStorageService } from './services/auth/token-storage.service';
 import { Component } from '@angular/core';
 
@@ -13,32 +13,35 @@ export class AppComponent {
   private role = localStorage.getItem('role');
 
   userLogged: Boolean = false;
-  userLogged2: Boolean;
+  userEditor: Boolean = false;
   userAdmin: Boolean = false;
   authorities: String[];
 
+  logged: Boolean = false;
+
   constructor(private tokenStorage: TokenStorageService,
-    private router: Router) {
+    private route: ActivatedRoute) {
     this.authorities = tokenStorage.getAuthorities();
     if(this.authorities.includes("ROLE_EDITOR")) {
-      this.userLogged = true;
+      this.userEditor = true;
+      this.logged = true;
     } else {
       //alert("FALSE");
-      this.userLogged = false;
+      this.userEditor = false;
     }
 
     if(this.authorities.includes("ROLE_ADMIN")) {
       this.userAdmin = true;
+      this.logged = true;
     } else {
       this.userAdmin = false;
     }
 
-    if(this.tokenStorage.getUser() != null) {
-      alert("TRU")
-      this.userLogged2 = true;
+    if(this.authorities.includes("ROLE_USER")) {
+      this.userLogged = true;
+      this.logged = true;
     } else {
-      alert("FAL")
-      this.userLogged2 = false;
+      this.userLogged = false;
     }
 
 
@@ -71,7 +74,6 @@ export class AppComponent {
 
   logout() {
     this.tokenStorage.signOut();
-    this.router.navigate(['/']);
     window.location.reload();
   }
 }

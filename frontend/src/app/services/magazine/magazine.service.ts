@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
 })
 export class MagazineService {
 
+  private MAGAZINEAPI = "http://localhost:8080/magazine/";
+
   constructor(private httpClient: HttpClient) { }
 
   //unos osnovnih podataka o magazinu
@@ -20,6 +22,14 @@ export class MagazineService {
 
   adminConfirm(magazine,taskId) {
     return this.httpClient.post("http://localhost:8080/welcome/post/confirmMagazine/".concat(taskId), magazine) as Observable<any>;
+  }
+
+  getAllMagazines(): Observable<any>{
+    return this.httpClient.get(this.MAGAZINEAPI + 'all'); 
+  }
+
+  getMagazine(magazineId: string): Observable<any>{
+    return this.httpClient.get(this.MAGAZINEAPI  + magazineId); 
   }
 
 

@@ -83,11 +83,37 @@ export class AddMagazineComponent implements OnInit {
   ngOnInit() {
   }
 
+  valid(value): boolean {
+
+    let o = new Array();
+    for (var property in value) {
+      console.log(property);
+      console.log(value[property]);
+     if(property == "titula" || property == "recenzent") {
+       continue;
+     } else {
+       if(value[property] == "") {
+         //alert("Usao u null");
+          return false;
+       }
+     }
+    }
+
+    return true;
+    
+  }
 
   field1;
 
   onSubmit(value, form){
-    let o = new Array();
+
+    var p = this.valid(value);
+   // alert("P : " + p);
+    if(p == false ) {
+     alert("Unesite sva polja koja su obavezna"); 
+     window.location.reload();
+    } else {
+      let o = new Array();
     for (var property in value) {
       console.log(property);
       console.log(value[property]);
@@ -133,6 +159,9 @@ export class AddMagazineComponent implements OnInit {
         console.log("Error occured");
       }
     );
+    }
+
+    
   }
 
   lista: Array<any>;

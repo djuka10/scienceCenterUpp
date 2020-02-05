@@ -1,3 +1,5 @@
+import { ViewMagazineComponent } from './view-magazine/view-magazine.component';
+import { ViewMagazinesComponent } from './view-magazines/view-magazines.component';
 import { Globals } from './guard/globals';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -23,6 +25,10 @@ import { AddMagazineComponent } from './add-magazine/add-magazine.component';
 import { LoginComponent } from './login/login.component';
 import { AddEditorReviewerComponent } from './add-editor-reviewer/add-editor-reviewer.component';
 import { AdminComponent } from './admin/admin.component';
+import { AddTextComponent } from './add-text/add-text.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { AnalizeTextComponent } from './analize-text/analize-text.component';
+import { AnalizePdfComponent } from './analize-pdf/analize-pdf.component';
 
 const ChildRoutes =
   [
@@ -83,7 +89,30 @@ const Routes = [
     path: "admin/confirmMagazine",
     component: AdminComponent,
     canActivate: [Notauthorized]
+  },
+  {
+    path: "view-magazines",
+    component: ViewMagazinesComponent,
+    canActivate: [Notauthorized]
+  },
+  {
+    path: 'view-magazine/:id', component: ViewMagazineComponent,
+  },
+  {
+    path: 'add-text/:id', component: AddTextComponent,
+  },
+  {
+    path: 'tasks', 
+    component: TasksComponent, 
+    canActivate: [Authorized]
+  },
+  {
+    path: 'analize-text/:taskId', component: AnalizeTextComponent,
+  },
+  {
+    path: 'analize-pdf/:taskId', component: AnalizePdfComponent,
   }
+  
   
 
 
@@ -102,7 +131,13 @@ const Routes = [
     AddMagazineComponent,
     LoginComponent,
     AddEditorReviewerComponent,
-    AdminComponent
+    AdminComponent,
+    ViewMagazinesComponent,
+    ViewMagazineComponent,
+    AddTextComponent,
+    TasksComponent,
+    AnalizeTextComponent,
+    AnalizePdfComponent
   ],
   imports: [
     BrowserModule,

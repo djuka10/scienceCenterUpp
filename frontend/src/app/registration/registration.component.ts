@@ -113,9 +113,17 @@ export class RegistrationComponent implements OnInit {
               this.globals.globalTaskId = l.taskId;
             }
 
-            alert("Ress: "+ this.globals.globalTaskId);
-            this.router.navigate(['/registrate/sciencearea/' + this.globals.globalTaskId]);
 
+            if(this.globals.globalTaskId == undefined) {
+              alert("User vec postoji!");
+              window.location.reload();
+            } else {
+              alert("Ress: "+ this.globals.globalTaskId);
+              this.router.navigate(['/registrate/sciencearea/' + this.globals.globalTaskId]);
+              
+            }
+
+           
           /*  this.repositoryService.completeTask(this.formFieldsDto.taskId).subscribe( data2 => {
               alert("Prosao complete!");
               this.router.navigate(['/registrate/sciencearea/' + this.globals.globalTaskId]);

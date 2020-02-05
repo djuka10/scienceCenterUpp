@@ -98,4 +98,8 @@ export class TokenStorageService {
     return sessionStorage.getItem(TASK_ID);
   }
 
+  public isLogged(): boolean {
+    return this.getToken() ? true : false;
+  }
+
 }
