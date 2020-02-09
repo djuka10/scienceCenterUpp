@@ -6,24 +6,24 @@
                     <!-- <a (click)="filterByAirline(undefined);" [class.active]="selectedAirline === undefined" class="list-group-item list-group-item-action" >Post text</a> -->
                    
                     <a (click)="viewEditions()"  class="list-group-item list-group-item-action" >View editions</a>
-                    <a (click)="subscribe()"  class="list-group-item list-group-item-info" *ngIf="isLogged">Subscribe</a>
-                    <a (click)="newText()"  class="list-group-item list-group-item-info" *ngIf="isLogged">Post text</a>
-
+                    <a (click)="subscribe()"  class="list-group-item list-group-item-info" *ngIf="isLogged">Pretplati se</a>
+                    <a (click)="newText()"  class="list-group-item list-group-item-info" *ngIf="isLogged">Dodaj tekst</a>
+                 
                   </div>
             </div>
       </div>
-      <div *ngIf="magazine" class="col-lg-8">
+      <div *ngIf="magazine"  class="col-lg-8">
         <table class="table table-bordered mt-3">
             <thead>
           
             </thead>
             <tbody>
               <tr>
-                <th>Magazine id</th>
+                <th>Id casopisa</th>
                 <td>{{magazine.magazineId}}</td>
               </tr>
               <tr class="info">
-                <th>Magazine name</th>
+                <th>Naziv magazina</th>
                 <td>{{magazine.name}}</td>
               </tr>
               <tr class="info">
@@ -31,7 +31,7 @@
                 <td>{{magazine.issn}}</td>
               </tr>
               <tr>
-                <th>Magazine science areas</th>
+                <th>Naucne oblasti:</th>
                 <b><table>
                     <tr *ngFor="let scArea of magazine.scienceAreas">
                         <td>{{scArea.scienceAreaCode}}</td>

@@ -5,24 +5,28 @@
 <h3>Basic</h3>
                 <table class="table table-bordered">
                     <tr>
-                        <th>Title</th>
+                        <th>Naslov</th>
                         <td>{{displayArticle.articleTitle}}</td>
                     </tr>
                     <tr>
-                        <th>Abstract</th>
+                        <th>Apstrakt</th>
                         <textarea class="form-control" name="" id=""  rows="5">{{displayArticle.articleAbstract}}</textarea>
                     </tr>
                     <tr>
-                        <th>Science area</th>
+                        <th>Naucne oblasti</th>
                         <td>Code {{displayArticle.scienceArea.scienceAreaCode}} , Name: {{displayArticle.scienceArea.scienceAreaName}}</td>
                     </tr>
                     <tr>
-                        <th>Author</th>
+                        <th>Autor</th>
                         <td>{{displayArticle.author.firstName}} {{displayArticle.author.lastName}}</td>
                     </tr>
                     <tr>
-                        <th>Key terms</th>
+                        <th>Kljucni pojmovi</th>
                         <td><span *ngFor="let term of displayArticle.keyTerms" class="badge badge-primary ml-3">{{term.termName}}</span></td>
+                    </tr>
+                    <tr>
+                        <th>Koautori:</th>
+                        <td><span *ngFor="let term of displayArticle.coAuthors" class="badge badge-primary ml-3">{{term.firstName}} {{term.lastName}}</span></td>
                     </tr>
                     <tr *ngIf="article">
                         <th>
@@ -44,8 +48,10 @@
                 <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
 
                   <div *ngFor="let field of formFields" >
+                    <div class="col-lg-4">
                       <label for={{field.id}}>{{field.label}}</label>
-                
+                    </div>
+                    <div class="col-lg-5">
                       <input type="text" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id!='password'" >
                       <input type="password" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id=='password'" >
                       <input type="checkbox" name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
@@ -55,7 +61,8 @@
                           {{field.type.values[val]}}
                         </option>
                       </select>
+                    </div>
                   </div>
                   
-                  <input type="submit">
+                  <input type="submit" class="col-lg-2" class="btn btn-success" value="Potvrdi">
                 </form>

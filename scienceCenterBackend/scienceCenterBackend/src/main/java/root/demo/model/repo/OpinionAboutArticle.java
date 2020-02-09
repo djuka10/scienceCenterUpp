@@ -26,6 +26,7 @@ public class OpinionAboutArticle implements Serializable {/**
 	
 	private String comment;
 	private String commentOnlyForEditor;
+	private String result;
 	
 	private int iteration;
 }

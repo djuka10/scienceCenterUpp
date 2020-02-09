@@ -8,6 +8,8 @@ export class Task {
     processId : string;       
     url : string;             
     parameter : string;
+
+    created : string;
     
     constructor() {}
 }

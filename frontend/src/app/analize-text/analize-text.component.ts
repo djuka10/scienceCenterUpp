@@ -72,7 +72,13 @@ export class AnalizeTextComponent implements OnInit {
     for (var property in value) {
       console.log(property);
       console.log(value[property]);
-      o.push({fieldId : property, fieldValue : value[property]});
+      if(value[property] != true) {
+        alert("USAO 1: " + false);
+        o.push({fieldId : property, fieldValue : false});
+      } else {
+        alert("USAO 2:" + true);
+        o.push({fieldId : property, fieldValue : true});
+      }
     }
 
     console.log(o);
@@ -82,8 +88,8 @@ export class AnalizeTextComponent implements OnInit {
     x.subscribe(
       res => {
         console.log(res);
-        
-        alert("Prosao analizu heh");
+        this.router.navigate(['']);
+      
       })
   }
 

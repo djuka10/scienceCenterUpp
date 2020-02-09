@@ -11,6 +11,8 @@
               <th>Task id</th>
               <th>Assignee</th>
               <th>Detail</th>
+              <th>Created</th>
+              <th></th>
               <th *ngIf="role === 'ADMIN'">Delete</th>
           </thead>
           <tbody>
@@ -18,7 +20,8 @@
                   <td>{{task.name}}</td>
                   <td>{{task.taskDefinitionId}}</td>
                   <td>{{task.assignee}}</td>
-                  <td><button (click)="view(task)">Complete</button></td>
+                  <td>{{task.created}}</td>
+                  <td><button (click)="view(task)">View</button></td>
                   <td *ngIf="role === 'ADMIN'"><button (click)="removeTask(task)">Remove</button></td>
               </tr>
           </tbody>

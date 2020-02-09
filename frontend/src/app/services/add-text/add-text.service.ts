@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -39,5 +39,41 @@ export class AddTextService {
 
   analizeBasicResult(article, taskId: string): Observable<any> {
     return this.httpClient.post(this.ADDTEXT_API + '/post/basicAnalize/'.concat(taskId),article);
+  }
+
+  postTimeForReviewing(article,taskId: string): Observable<any> {
+    return this.httpClient.post(this.ADDTEXT_API + '/post/timeForReviewing/'.concat(taskId),article);
+  }
+
+  getPDF(invoiceId : number): Observable<Blob>
+     {
+         
+         var authorization = 'Bearer '+sessionStorage.getItem("access_token");
+
+         const headers = new HttpHeaders({ 'Content-Type': 'application/json',
+         "Authorization": authorization, responseType : 'blob'});
+
+         return this.httpClient.get<Blob>(this.ADDTEXT_API + '/pdf/'+invoiceId, { headers : headers,responseType : 
+         'blob' as 'json'});
+     }
+     
+  startUpdateArticle(taskId: string): Observable<any>{
+    return this.httpClient.get(this.ADDTEXT_API + '/updateArticleStart/'.concat(taskId)); 
+  }
+
+  updateArticle(article, taskId) : Observable<any>{
+    return this.httpClient.put(this.ADDTEXT_API + "/updateArticle/".concat(taskId), article);
+  }
+
+  startUpdateArticle2(taskId: string): Observable<any>{
+    return this.httpClient.get(this.ADDTEXT_API + 'updateArticleStart2/'.concat(taskId)); 
+  }
+
+  startReviewArticle() {
+
+  }
+
+  startUpdateChanges(taskId: string): Observable<any>{
+    return this.httpClient.get(this.ADDTEXT_API + '/updateArticleChangesStart/'.concat(taskId)); 
   }
 }

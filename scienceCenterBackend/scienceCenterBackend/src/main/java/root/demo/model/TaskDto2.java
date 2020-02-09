@@ -1,6 +1,7 @@
 package root.demo.model;
 
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,4 +20,6 @@ public class TaskDto2 {
 	private String processId;
 	private String url;
 	private String parameter;
+	
+	private String created;
 }

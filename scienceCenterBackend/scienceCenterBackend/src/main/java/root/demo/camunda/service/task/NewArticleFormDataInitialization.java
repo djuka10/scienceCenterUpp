@@ -82,7 +82,7 @@ public class NewArticleFormDataInitialization implements TaskListener {
 	
 
 		// TODO ne radi formService, nekako pokusati u controlleru da ubacimo ove formField-ove kako
-		//bismo poslali sve djuture na front ==> Sutra, sad u KIKINDU!
+		
 		
 				
 		

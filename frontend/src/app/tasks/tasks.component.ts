@@ -22,6 +22,7 @@ export class TasksComponent implements OnInit {
 
     x.subscribe(res => {
       this.tasks = res;
+      console.log(this.tasks);
     }, error =>  {
 
     });

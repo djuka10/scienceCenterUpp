@@ -5,12 +5,13 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
 
 
 import root.demo.model.repo.EditorByScienceArea;
@@ -56,6 +57,12 @@ public class DataLoader implements ApplicationRunner {
 	@Autowired
 	private EditorReviewerByScienceAreaRepository editorReviewerRepo;
 
+	@Autowired
+	private ScienceAreaRepository sarRepo;
+	
+	@Autowired
+    PasswordEncoder passwordEncoder;
+	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		// TODO Auto-generated method stub
@@ -183,7 +190,188 @@ public class DataLoader implements ApplicationRunner {
 				.role(basic)
 				.build();
 		
+		// editori
 		
+			MyUser user1 = MyUser.builder()
+					.firstName("Petar")
+					.lastName("Editor")
+					.activate(true)
+					.city("Novi Sad")
+					.country("Serbia")
+					.mail("edit1@gmail.com")
+					.title("dipling")
+					.role(editorRole)
+					.reviewer(false)
+					.password(passwordEncoder.encode("editorDemo"))
+					.username("editorDemo").build();
+			
+			MyUser user2 = MyUser.builder()
+					.firstName("Nikola")
+					.lastName("Editor1")
+					.activate(true)
+					.city("Novi Sad")
+					.country("Serbia")
+					.mail("edit2@gmail.com")
+					.title("dipling")
+					.role(editorRole)
+					.reviewer(false)
+					.password(passwordEncoder.encode("editorDemo1"))
+					.username("editorDemo1").build();
+			
+			MyUser user3 = MyUser.builder()
+					.firstName("Maja")
+					.lastName("Editor2")
+					.activate(true)
+					.city("Novi Sad")
+					.country("Serbia")
+					.mail("edit3@gmail.com")
+					.title("dipling")
+					.role(editorRole)
+					.reviewer(false)
+					.password(passwordEncoder.encode("editorDemo2"))
+					.username("editorDemo2").build();
+			
+			MyUser user4 = MyUser.builder()
+					.firstName("Miroslav")
+					.lastName("Editor3")
+					.activate(true)
+					.city("Novi Sad")
+					.country("Serbia")
+					.mail("edit4@gmail.com")
+					.title("dipling")
+					.role(editorRole)
+					.reviewer(false)
+					.password(passwordEncoder.encode("editorDemo3"))
+					.username("editorDemo3").build();
+			
+			MyUser user5 = MyUser.builder()
+					.firstName("Marijana")
+					.lastName("Editor4")
+					.activate(true)
+					.city("Novi Sad")
+					.country("Serbia")
+					.mail("edit5@gmail.com")
+					.title("dipling")
+					.role(editorRole)
+					.reviewer(false)
+					.password(passwordEncoder.encode("editorDemo4"))
+					.username("editorDemo4").build();
+			
+			MyUser user6 = MyUser.builder()
+					.firstName("Olga")
+					.lastName("Editor5")
+					.activate(true)
+					.city("Novi Sad")
+					.country("Serbia")
+					.mail("edit6@gmail.com")
+					.title("dipling")
+					.role(editorRole)
+					.reviewer(false)
+					.password(passwordEncoder.encode("editorDemo5"))
+					.username("editorDemo5").build();
+		
+		//recenzenti
+			//recezenti
+			List<Long> ids = Arrays.asList(new Long[] {1l,2l,3l,4l});
+			List<ScienceArea> scAreasList = sarRepo.findAllById(ids);
+			Set<ScienceArea> scAreasSet = new HashSet<ScienceArea>(scAreasList);
+			
+			MyUser user7 = MyUser.builder()
+					.firstName("Luka")
+					.lastName("Recezentovic")
+					.activate(true)
+					.city("Novi Sad")
+					.country("Serbia")
+					.mail("rec1@gmail.com")
+					.title("dipling")
+					.reviewer(true)
+					.role(reviewerRole)
+					//.reviewer(false)
+					.password(passwordEncoder.encode("reviewerDemo"))
+					.scienceArea(scAreasSet)
+					.username("reviewerDemo").build();
+			
+			MyUser user8 = MyUser.builder()
+					.firstName("Nikola")
+					.lastName("Recezent 1")
+					.activate(true)
+					.city("Novi Sad")
+					.country("Serbia")
+					.mail("rec2@gmail.com")
+					.title("dipling")
+					.role(reviewerRole)
+					
+					.reviewer(true)
+					//.reviewer(false)
+					.password(passwordEncoder.encode("reviewerDemo1"))
+					.scienceArea(scAreasSet)
+					.username("reviewerDemo1").build();
+			
+			user8.getRoles().add(reviewerRole);
+			
+			
+			MyUser user9 = MyUser.builder()
+					.firstName("Marko")
+					.lastName("Recezent 2")
+					.activate(true)
+					.city("Novi Sad")
+					.country("Serbia")
+					.mail("rec3@gmail.com")
+					.title("dipling")
+					.role(reviewerRole)
+					.reviewer(true)
+					//.reviewer(false)
+					.password(passwordEncoder.encode("reviewerDemo2"))
+					.scienceArea(scAreasSet)
+					.username("reviewerDemo2").build();
+			user9.getRoles().add(reviewerRole);
+			
+			MyUser user10 = MyUser.builder()
+					.firstName("Blagoje")
+					.lastName("Recezent 3")
+					.activate(true)
+					.city("Novi Sad")
+					.country("Serbia")
+					.mail("rec4@gmail.com")
+					.title("dipling")
+					.role(reviewerRole)
+					.reviewer(true)
+					//.reviewer(false)
+					.scienceArea(scAreasSet)
+					.password(passwordEncoder.encode("reviewerDemo3"))
+					.username("reviewerDemo3").build();
+			user10.getRoles().add(reviewerRole);
+			
+			MyUser user11 = MyUser.builder()
+					.firstName("Ostoja")
+					.lastName("Recezent 4")
+					.activate(true)
+					.city("Novi Sad")
+					.country("Serbia")
+					.mail("rec5@gmail.com")
+					.title("dipling")
+					.role(reviewerRole)
+					.reviewer(true)
+					//.reviewer(false)
+					.scienceArea(scAreasSet)
+					.password(passwordEncoder.encode("reviewerDemo4"))
+					.username("reviewerDemo4").build();
+			
+			MyUser user12 = MyUser.builder()
+					.firstName("Mirjana")
+					.lastName("Recezent 5")
+					.activate(true)
+					.city("Novi Sad")
+					.country("Serbia")
+					.mail("rec6@gmail.com")
+					.title("dipling")
+					.role(reviewerRole)
+					.reviewer(true)
+					//.reviewer(false)
+					.scienceArea(scAreasSet)
+					.password(passwordEncoder.encode("reviewerDemo5"))
+					.username("reviewerDemo5").build();
+
 		
 		
 //		MyUser admin = new MyUser(1l, "admin","$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra","vikac@gmail.com","Petar","Petrovic","Novi Sad", "Srbija","Titula",false,true,adminRole);
@@ -220,6 +408,20 @@ public class DataLoader implements ApplicationRunner {
 		userRepo.save(reviewer);
 		userRepo.save(cheifEditor);
 		userRepo.save(basicUser);
+		//cuvanje editora
+		userRepo.save(user1);
+		userRepo.save(user2);
+		userRepo.save(user3);
+		userRepo.save(user4);
+		userRepo.save(user5);
+		userRepo.save(user6);
+		//cuvanje recenzenata
+		userRepo.save(user7);
+		userRepo.save(user8);
+		userRepo.save(user9);
+		userRepo.save(user10);
+		userRepo.save(user11);
+		userRepo.save(user12);
 		//userRepo.save(editor2);
 		//userRepo.save(reviewer2);
 
@@ -259,8 +461,8 @@ public class DataLoader implements ApplicationRunner {
 		ScienceArea computerScience = scienceAreas.get(0);
 		ScienceArea artificialIntelligence = scienceAreas.get(1);
 		
-		MyUser computerScienceEditor = userRepo.findByusername("editorDemo1");
-		MyUser artificialInteligenceEditor = userRepo.findByusername("editorDemo2");
+		MyUser computerScienceEditor = userRepo.findByusername("editor");
+		MyUser artificialInteligenceEditor = userRepo.findByusername("editor");
 		
 		MyUser computerScienceReviewer1 = userRepo.findByusername("reviewerDemo1");
 		MyUser computerScienceReviewer2 = userRepo.findByusername("reviewerDemo2");
@@ -335,8 +537,33 @@ public class DataLoader implements ApplicationRunner {
 		editorReviewerRepo.save(reviewer1);
 		editorReviewerRepo.save(reviewer2);
 		editorReviewerRepo.save(reviewer3);
-
 		
+		Magazine magazine2 = Magazine.builder()
+				.active(true)
+				.username("4563-1232")
+				.membershipPrice(500f)
+				.name("INFORMER")
+				.wayOfPayment(WayOfPayment.OPEN_ACCESS)
+				.chiefEditor(chiefEditor)
+				.scienceAreas(new HashSet<ScienceArea>(scienceAreas))
+				.build();
+
+		Magazine persistedMagazine2 = magRepo.save(magazine2);
+		
+		MagazineEdition magazineEdition11 = MagazineEdition.builder()
+				.magazineEditionPrice(100f)
+				.publishingDate(new Date())
+				.magazine(persistedMagazine2)
+				.build();
+
+		MagazineEdition magazineEdition22 = MagazineEdition.builder()
+		.magazineEditionPrice(200f)
+		.publishingDate(new Date(119, 11, 30))  //2019 godina
+		.magazine(persistedMagazine2)
+		.build();
+		
+		magEdRepo.save(magazineEdition11);
+		magEdRepo.save(magazineEdition22);
 		
 	}
 	

@@ -1,3 +1,4 @@
+import { UpdateArticleChanges } from './model/update-article-changes-dto';
 import { ViewMagazineComponent } from './view-magazine/view-magazine.component';
 import { ViewMagazinesComponent } from './view-magazines/view-magazines.component';
 import { Globals } from './guard/globals';
@@ -29,6 +30,13 @@ import { AddTextComponent } from './add-text/add-text.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { AnalizeTextComponent } from './analize-text/analize-text.component';
 import { AnalizePdfComponent } from './analize-pdf/analize-pdf.component';
+import { DefineTimeForReviewingComponent } from './define-time-for-reviewing/define-time-for-reviewing.component';
+import { AddReviewerComponent } from './add-reviewer/add-reviewer.component';
+import { UpdateArticleComponent } from './update-article/update-article.component';
+import { ReviewArticleComponent } from './review-article/review-article.component';
+import { ReviewArticleByEditorComponent } from './review-article-by-editor/review-article-by-editor.component';
+import { UpdateChangesComponent } from './update-changes/update-changes.component';
+import { AddReviewerWhenErrorComponent } from './add-reviewer-when-error/add-reviewer-when-error.component';
 
 const ChildRoutes =
   [
@@ -111,6 +119,27 @@ const Routes = [
   },
   {
     path: 'analize-pdf/:taskId', component: AnalizePdfComponent,
+  },
+  {
+    path: 'define-time-for-reviewing/:taskId', component: DefineTimeForReviewingComponent
+  },
+  {
+    path: 'add-review/:taskId', component: AddReviewerComponent
+  },
+  {
+    path: 'update-article/:taskId', component: UpdateArticleComponent,
+  },
+  {
+    path: 'review-article/:taskId', component: ReviewArticleComponent,
+  },
+  {
+    path: 'review-article-by-editor/:taskId', component: ReviewArticleByEditorComponent
+  },
+  {
+    path: 'update-article-changes/:taskId', component: UpdateChangesComponent,
+  },
+  {
+    path: 'add-review-when-error/:taskId', component: AddReviewerWhenErrorComponent,
   }
   
   
@@ -137,7 +166,14 @@ const Routes = [
     AddTextComponent,
     TasksComponent,
     AnalizeTextComponent,
-    AnalizePdfComponent
+    AnalizePdfComponent,
+    DefineTimeForReviewingComponent,
+    AddReviewerComponent,
+    UpdateArticleComponent,
+    ReviewArticleComponent,
+    ReviewArticleByEditorComponent,
+    UpdateChangesComponent,
+    AddReviewerWhenErrorComponent
   ],
   imports: [
     BrowserModule,

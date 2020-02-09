@@ -3,6 +3,7 @@ package root.demo.controller;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.camunda.bpm.engine.FormService;
@@ -99,7 +100,9 @@ public class TaskController {
 				param = task.getId();
 			}
 			if(url == null) {};
-			TaskDto2 t = new TaskDto2(task.getId(), task.getName(), task.getAssignee(), task.getDescription(), taskDefinitionKey, task.getProcessInstanceId(), url, param);
+			Date d = task.getCreateTime();
+			
+			TaskDto2 t = new TaskDto2(task.getId(), task.getName(), task.getAssignee(), task.getDescription(), taskDefinitionKey, task.getProcessInstanceId(), url, param, d.toString());
 			dtos.add(t);			
 		}
 		

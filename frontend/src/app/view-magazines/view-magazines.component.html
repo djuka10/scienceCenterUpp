@@ -54,3 +54,28 @@
     </div>
 </div>
 
+<div *ngFor="let mag of magazines" >
+    <section class="container content-section">
+      
+      <div class="shop-items" class="twoFlight" >
+          <h2 class="section-header">Casopis {{mag.magazineId}}</h2>
+          <div class="shop-item">
+              <span class="shop-item-title">ISSN: {{mag.issn}} </span>
+              <br>
+              <span class="shop-item-title">Naziv : {{mag.name}}</span>
+              <br>
+              <span class="shop-item-title">Naucne oblasti: </span>
+              <div *ngFor="let scArea of mag.scienceAreas">
+                  <span class="shop-item-title"> 
+                      {{scArea.scienceAreaCode}}: {{scArea.scienceAreaName}}
+                  </span>
+              </div>  
+                  <button (click)="addToCart(mag.issn)" class="btn btn-primary shop-item-button btn-block" type="button">ADD TO CART</button>
+                  <button type="submit" class="btn btn-primary btn-block detail" (click)="detail(mag.magazineId)">
+                      Detail
+                  </button>
+          </div>
+      </div>
+    </section>
+</div>
+

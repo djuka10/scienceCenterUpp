@@ -74,37 +74,53 @@ export class AnalizePdfComponent implements OnInit {
         
               //let t2 = EncodeDecode.b64Decode(this.article.file);
               //let t2 = this.article.file;
-               let t2 = atob(this.article.file.toString());
+              // let t2 = atob(this.article.file.toString());
                //let t2 = EncodeDecode.b64EncodeUnicode(this.article.file.toString());
-               const blob2 = new Blob([t2], { type: 'application/pdf' });
-               this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob2));
+              // const blob2 = new Blob([t2], { type: 'application/pdf' });
+              // this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob2));
         
               // this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
               // this.fileUrl = window.URL.createObjectURL(blob);
         
-              let r: Blob = new Blob();
+              let file: Blob = new Blob([this.article.file.toString()], {type: 'application/pdf'});
+             // this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(file));
+              let fileURL = URL.createObjectURL(file);
+              this.fileUrl = fileURL;
+/*
+              window.open(fileURL); 
+              var a         = document.createElement('a');
+              a.href        = fileURL; 
+              a.target      = '_blank';
+              a.download    = 'bill.pdf';
+              document.body.appendChild(a);
+              a.click();*/
 
-
-
-
-
-
-
+              const linkSource = 'data:application/pdf;base64,' + this.article.file;
+              const downloadLink = document.createElement("a");
+              const fileName = "sample.pdf";
+              //testirati
+             // downloadLink.href = linkSource;
+             // downloadLink.download = fileName;
+             // downloadLink.click();
 
             })
-
-
-        
+     
 
       })
       
     });
 
+  }
 
+  download() {
 
-
-
-
+    const linkSource = 'data:application/pdf;base64,' + this.article.file;
+    const downloadLink = document.createElement("a");
+    const fileName = "sample.pdf";
+    //testirati
+    downloadLink.href = linkSource;
+    downloadLink.download = fileName;
+    downloadLink.click();
 
   }
 
@@ -113,7 +129,15 @@ export class AnalizePdfComponent implements OnInit {
     for (var property in value) {
       console.log(property);
       console.log(value[property]);
-      o.push({fieldId : property, fieldValue : value[property]});
+      if(value[property] != true) {
+        alert("USAO 1");
+        o.push({fieldId : property, fieldValue : false});
+      } else {
+        alert("USAO 2");
+        o.push({fieldId : property, fieldValue : true});
+      }
+       
+      //o.push({fieldId : property, fieldValue : value[property]});
     }
 
     console.log(o);
@@ -124,7 +148,8 @@ export class AnalizePdfComponent implements OnInit {
       res => {
         console.log(res);
         
-        alert("Prosao analizu heh");
+        alert("Prosao analizu");
+        this.router.navigate(['']);
       })
   }
 

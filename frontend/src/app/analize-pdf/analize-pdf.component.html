@@ -1,14 +1,16 @@
-<p>
-  analize-pdf works!
-</p>
 
-<a [href]="fileUrl" download>Preuzmi fajl</a>
+<div class="col-lg-4">
+    <a (click)="download()" >-----> Preuzmi fajl <-----</a>
+</div>
+
 
 <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
 
   <div *ngFor="let field of formFields" >
-      <label for={{field.id}}>{{field.label}}</label>
-
+      <div class="col-lg-4">
+          <label for={{field.id}}>{{field.label}}</label>
+      </div>
+      <div class="col-lg-5">
       <input type="text" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id!='password'" >
       <input type="password" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id=='password'" >
       <input type="checkbox" name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
@@ -18,7 +20,10 @@
           {{field.type.values[val]}}
         </option>
       </select>
+    </div>
   </div>
   
-  <input type="submit">
+  <div class="col-lg-1">
+      <input type="submit" class="btn btn-success form-control" value="Potvrdi">
+  </div>
 </form>

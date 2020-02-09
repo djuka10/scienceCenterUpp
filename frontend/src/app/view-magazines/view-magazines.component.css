@@ -20,7 +20,11 @@
     display:block;
   }
 
-
+.twoFlight {
+    border: 2px solid black;
+    margin-top:5px;
+    background-color:lightblue;
+}
 
 
 

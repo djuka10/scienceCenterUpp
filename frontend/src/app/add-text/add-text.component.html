@@ -68,11 +68,8 @@
   </div>
 
     <div class="row">
-        <div class="col-lg-6">
-
-        </div>
-        <div class="col-lg-3">
-          <input type="submit" class="btn btn-success form-control" value="Add article">
+        <div class="col-lg-4">
+          <input type="submit" class="btn btn-success form-control" value="Add text">
         </div>
     </div>
 
@@ -83,95 +80,95 @@
 
     <div class="row">
         <div class="col" *ngIf="field.id=='kljucniPojmovi'">
-            <h2 class="text-center">Terms</h2>
+            <h2 class="text-center">Kljucni pojmovi</h2>
             <div class="form-group row" >
-                <div class="col-lg-4"><label for="customTerm">Custom term:</label></div>
+                <div class="col-lg-4"><label for="customTerm">Dodaj svoj:</label></div>
                 <div class="col-lg-5"><input type="text" class="form-control" name="customTerm" [(ngModel)]="customTerm.termName" #customTerm="ngModel"
                     /></div>
                 <div   class="col-lg-3">
-                    <button class="btn btn-success" (click)="addCustom(customTerm)">Add</button>
+                    <button class="btn btn-success" (click)="addCustom(customTerm)">Dodaj</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <h3 class="text-center">Selected terms</h3>
+                    <h3 class="text-center">Izabrani:</h3>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Remove</th>
+                                <th>Naziv</th>
+                                <th>Obrisi</th>
                             </tr>
                         </thead>
                         <tr *ngFor="let t of articleData.articleTerm">
                             <td>{{t.termName}}</td>
-                            <td><button class="btn btn-danger" (click)="delete(t)">Remove</button></td>
+                            <td><button class="btn btn-danger" (click)="delete(t)">-</button></td>
                         </tr>
                     </table>
                 </div>
                 <div class="col">
-                    <h3 class="text-center">Terms to select</h3>
+                    <h3 class="text-center">Odaberi iz liste:</h3>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Add</th>
+                                <th>Naziv</th>
+                                <th>Dodaj</th>
                             </tr>
                         </thead>
                         <tr *ngFor="let term of formFieldsDto.articleTerms">
                             <td>{{term.termName}}</td>
-                            <td><button class="btn btn-info" (click)="add(term)">Add</button></td>
+                            <td><button class="btn btn-info" (click)="add(term)">+</button></td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
         <div class="col" *ngIf="field.id=='koautor'">
-            <h2 class="text-center">Coauthors</h2>
+            <h2 class="text-center">Koautori</h2>
             <div class="row">
                 <div class="col-lg-5">
-                    <button class="btn btn-info" (click)="activeForm = 'custom'">Add custom</button>
+                    <button class="btn btn-info" (click)="activeForm = 'custom'">Dodaj svog</button>
                 </div>
                 <div class="col-lg-2"></div>
                 <div class="col-lg-5" >
-                    <button class="btn btn-info" (click)="activeForm = 'existing'">Add existing</button>
+                    <button class="btn btn-info" (click)="activeForm = 'existing'">Dodaj postojeceg</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    <h3 class="text-center">Selected coauthors</h3>
+                    <h3 class="text-center">Odabrani koautori</h3>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Remove</th>
+                                <th>Naziv</th>
+                                <th>Obrisi</th>
                             </tr>
                         </thead>
                         <tr *ngFor="let c of articleData.articleCoAuthors">
                             <td>{{c.firstName}} {{c.lastName}}</td>
-                            <td><button class="btn btn-danger" (click)="deleteCoauthor(c)">Remove</button></td>
+                            <td><button class="btn btn-danger" (click)="deleteCoauthor(c)">-</button></td>
                         </tr>
                     </table>
                 </div>
                 <div class="col-lg-6" *ngIf="activeForm === 'existing'">
-                    <h3 class="text-center">Coauthor to select</h3>
+                    <h3 class="text-center">Izaberi iz liste koautora</h3>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Add</th>
+                                <th>Naziv</th>
+                                <th>Dodaj</th>
                             </tr>
                         </thead>
                         <tr *ngFor="let coauthor of formFieldsDto.coAuthors">
                             <td>{{coauthor.firstName}} {{coauthor.lastName}}</td>
-                            <td><button class="btn btn-info" (click)="addExisting(coauthor)">Add</button></td>
+                            <td><button class="btn btn-info" (click)="addExisting(coauthor)">+</button></td>
                         </tr>
                     </table>
                 </div>
                 <div class="col-lg-6" *ngIf="activeForm === 'custom'">
-                    <h3 class="text-center">Add coauthor</h3>
+                    <h3 class="text-center">Dodaj koautora</h3>
                     <form #f="ngForm" (ngSubmit)="f.form.valid && addCustomCouathor(f.value, f)" novalidate>
                         <div class="form-group">
-                          <label for="customFirstName">First name:</label>
+                          <label for="customFirstName">Ime:</label>
                           <input type="text" class="form-control" name="customFirstName" [(ngModel)]="customUser.firstName" #customFirstName="ngModel"
                           [ngClass]="{ 'is-invalid': f.submitted && customFirstName.invalid }" required>
                           <div  *ngIf="f.submitted && customFirstName.invalid" class="text-danger">
@@ -179,7 +176,7 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label for="customLastName">Last name:</label>
+                          <label for="customLastName">Prezime:</label>
                           <input type="text" class="form-control" name="customLastName" [(ngModel)]="customUser.lastName" #customLastName="ngModel"
                           [ngClass]="{ 'is-invalid': f.submitted && customLastName.invalid }" required >
                           <div  *ngIf="f.submitted && customLastName.invalid" class="text-danger">
@@ -187,7 +184,7 @@
                           </div>
                         </div>
                         <div class="form-group">
-                            <label for="customEmail">Email address:</label>
+                            <label for="customEmail">Email:</label>
                             <input type="email" class="form-control" name="customEmail" [(ngModel)]="customUser.email" #customEmail="ngModel"
                             [ngClass]="{ 'is-invalid': f.submitted && customEmail.invalid }" required >
                             <div  *ngIf="f.submitted && customEmail.invalid" class="text-danger">
@@ -196,7 +193,7 @@
                             </div>
                           </div>
                         <div class="form-group">
-                           <label for="customCity">City:</label>
+                           <label for="customCity">Grad:</label>
                             <input type="text" class="form-control" name="customCity" [(ngModel)]="customUser.city" #customCity="ngModel"
                             [ngClass]="{ 'is-invalid': f.submitted && customCity.invalid }" required >
                             <div  *ngIf="f.submitted && customCity.invalid" class="text-danger">
@@ -204,7 +201,7 @@
                               </div>
                         </div>
                         <div class="form-group">
-                            <label for="customCountry">Country:</label>
+                            <label for="customCountry">Drzava:</label>
                             <input type="text" class="form-control" name="customCountry" [(ngModel)]="customUser.country" #customCountry="ngModel"
                             [ngClass]="{ 'is-invalid': f.submitted && customCountry.invalid }" required >
                             <div  *ngIf="f.submitted && customCountry.invalid" class="text-danger">

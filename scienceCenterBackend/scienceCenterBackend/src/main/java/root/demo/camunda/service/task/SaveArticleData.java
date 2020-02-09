@@ -292,6 +292,7 @@ public class SaveArticleData implements JavaDelegate {
 								.build();
 		
 		ArticleProcessDto articleProcessIfUpdate = (ArticleProcessDto) execution.getVariable("articleProcessDto");
+		
 		if(articleProcessIfUpdate != null) {
 			article.setArticleId(articleProcessIfUpdate.getArticleId());
 			articleRepo.save(article);
@@ -302,6 +303,8 @@ public class SaveArticleData implements JavaDelegate {
 			ArticleProcessDto articleProcessDto = new ArticleProcessDto(execution.getProcessInstanceId(), 
 					magazineId, persistedArticle.getArticleId(), author.getUsername(), "", "",
 					new ArrayList<String>(), new ArrayList<OpinionAboutArticle>(), new ArrayList<OpinionAboutArticle>() , new ArrayList<OpinionAboutArticle>(), 1);
+			
+			
 			
 			execution.setVariable("articleProcessDto", articleProcessDto);
 		}

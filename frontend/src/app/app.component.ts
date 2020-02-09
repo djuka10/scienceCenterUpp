@@ -22,7 +22,8 @@ export class AppComponent {
   constructor(private tokenStorage: TokenStorageService,
     private route: ActivatedRoute) {
     this.authorities = tokenStorage.getAuthorities();
-    if(this.authorities.includes("ROLE_EDITOR")) {
+    if(this.authorities.includes("ROLE_EDITOR") ||
+    this.authorities.includes("ROLE_REVIEWER")) {
       this.userEditor = true;
       this.logged = true;
     } else {

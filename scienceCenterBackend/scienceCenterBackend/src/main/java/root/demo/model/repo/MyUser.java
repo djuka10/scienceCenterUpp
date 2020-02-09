@@ -3,6 +3,7 @@ package root.demo.model.repo;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,12 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.CodePointLength;
-
 
 
 import lombok.AllArgsConstructor;
@@ -27,6 +28,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import root.demo.model.user.tx.Membership;
 
 @Entity
 @Getter
@@ -82,6 +84,9 @@ public class MyUser {
     	inverseJoinColumns = @JoinColumn(name = "role_id"))
 	@OnDelete(action = OnDeleteAction.CASCADE) 
     private Set<Role> roles = new HashSet<>();
+	
+	@OneToMany
+	private Set<Membership> memberships;
 	
 
 //	public Role getRole() {

@@ -23,10 +23,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+
 
 import root.demo.model.ArticleDto;
 import root.demo.model.ArticleProcessDto;
@@ -38,6 +41,8 @@ import root.demo.model.NewArticleResponseDto;
 import root.demo.model.ScienceAreaDto;
 import root.demo.model.TaskDto;
 import root.demo.model.TermDto;
+import root.demo.model.UpdateArticleChangesDto;
+import root.demo.model.UpdateArticleDto;
 import root.demo.model.UserDto;
 import root.demo.model.repo.Article;
 import root.demo.model.repo.Magazine;
@@ -277,6 +282,51 @@ public class AddTextController {
         return new ResponseEntity<ArticleDto>(articleDto, HttpStatus.OK);
     }
 	
+	@GetMapping(path = "/pdf/{taskId}", produces = "application/json")
+    public @ResponseBody ResponseEntity<ArticleDto> getPdf(@PathVariable String taskId) {
+
+		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+		String proccessInstanceId = task.getProcessInstanceId();
+		
+		//ovde mozemo iz baze izvuci by the way
+		
+		//Article a = articleRepo.
+		
+		//ArticleDto requestDto = (ArticleDto) runtimeService.getVariable(proccessInstanceId, "articleRequestDto");
+		// runtimeService.removeVariable(proccessInstanceId, "articleRequestDto");
+		
+		ProcessInstance processInstance1 =  runtimeService.createProcessInstanceQuery().processInstanceId(proccessInstanceId).singleResult();
+		Task taskAnalizeText = null;
+		try {
+			taskAnalizeText = taskService.createTaskQuery().processInstanceId(proccessInstanceId).list().get(0);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			
+			//System.out.println("bacaj ga nekompatabilnost");
+    		//return ResponseEntity.status(error.getStatus()).body(new Response(HttpStatus.));
+    		return new ResponseEntity<>(HttpStatus.OK);
+
+		}
+
+		
+		ArticleProcessDto requestDto = (ArticleProcessDto) runtimeService.getVariable(proccessInstanceId, "articleProcessDto");
+		Long longId = requestDto.getArticleId();
+		Article article = articleRepo.getOne(longId);	
+		
+		String document = Base64Utility.encode(article.getFile());
+		
+		
+		ArticleDto articleDto = new ArticleDto();
+		articleDto.setTaskId(taskAnalizeText.getId());
+		articleDto.setProcessInstanceId(proccessInstanceId);
+		articleDto.setFile(document);
+		
+		
+		
+        return new ResponseEntity<ArticleDto>(articleDto, HttpStatus.OK);
+    }
+	
 	@PostMapping(path = "/post/basicAnalize/{taskId}", produces = "application/json")
     public @ResponseBody ResponseEntity postMainData(@RequestBody List<FormSubmissionDto2> dto, @PathVariable String taskId) {
 		HashMap<String, Object> map = this.mapListToDto(dto);
@@ -302,6 +352,91 @@ public class AddTextController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+	
+	@PostMapping(path = "/post/timeForReviewing/{taskId}", produces = "application/json")
+    public @ResponseBody ResponseEntity postTime(@RequestBody List<FormSubmissionDto2> dto, @PathVariable String taskId) {
+		HashMap<String, Object> map = this.mapListToDto(dto);
+				
+		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+		String processInstanceId = task.getProcessInstanceId();
+
+		formService.submitTaskForm(taskId, map);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+	
+	@GetMapping(path = "/updateArticleStart2/{taskId}", produces = "application/json")
+    public @ResponseBody ResponseEntity updateArticleStart2(@PathVariable String taskId) {
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/updateArticleStart/{taskId}", produces = "application/json")
+    public @ResponseBody ResponseEntity<UpdateArticleDto> updateArticleStart(@PathVariable String taskId) {
+		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+		String proccessInstanceId = task.getProcessInstanceId();
+		
+					
+		UpdateArticleDto requestDto = (UpdateArticleDto) runtimeService.getVariable(proccessInstanceId, "updateArticleRequestDto");
+		runtimeService.removeVariable(proccessInstanceId, "updateArticleRequestDto");
+		
+		TaskFormData tfd = formService.getTaskFormData(requestDto.getTaskId());
+		
+		List<FormField> properties = tfd.getFormFields();
+		for(FormField fp : properties) {
+			System.out.println(fp.getId() + fp.getType());
+			requestDto.getFormFields().add(fp);
+		}
+		
+		
+		System.out.println("STOP");
+		
+        return new ResponseEntity<UpdateArticleDto>(requestDto, HttpStatus.OK);
+    }	
+	
+	@PutMapping(path = "/updateArticle/{taskId}", produces = "application/json")
+    public @ResponseBody ResponseEntity updateArticle(@RequestBody List<FormSubmissionDto2> dto, @PathVariable String taskId) throws IOException {
+		HashMap<String, Object> map = this.mapListToDto(dto);
+		
+		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+		
+//		Decoder decoder = Base64.getDecoder();
+//        byte[] decodedByte = decoder.decode(dto.getFile().split(",")[1]);
+//        FileOutputStream fos = new FileOutputStream("MyAudio.webm");
+//        fos.write(decodedByte);
+//        fos.close();
+		
+		String processInstanceId = task.getProcessInstanceId();
+		// formService.submitTaskForm(taskId, properties);
+		runtimeService.setVariable(processInstanceId, "newArticleDto", dto);
+//		formService.submitTaskForm(taskId, new HashMap<String, Object>());
+		taskService.complete(taskId);
+
+		
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+	
+	@GetMapping(path = "/updateArticleChangesStart/{taskId}", produces = "application/json")
+    public @ResponseBody ResponseEntity<UpdateArticleChangesDto> updateArticleChangesStart(@PathVariable String taskId) {
+		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+		String proccessInstanceId = task.getProcessInstanceId();
+		
+					
+		UpdateArticleChangesDto requestDto = (UpdateArticleChangesDto) runtimeService.getVariable(proccessInstanceId, "updateArticleChangesDto");
+		//runtimeService.removeVariable(proccessInstanceId, "updateArticleChangesDto");
+		
+		TaskFormData tfd = formService.getTaskFormData(requestDto.getTaskId());
+		
+		List<FormField> properties = tfd.getFormFields();
+		for(FormField fp : properties) {
+			System.out.println(fp.getId() + fp.getType());
+			requestDto.getFormFields().add(fp);
+		}
+		
+		
+		System.out.println("STOP");
+		
+        return new ResponseEntity<UpdateArticleChangesDto>(requestDto, HttpStatus.OK);
+    }	
 	
 	private HashMap<String, Object> mapListToDto(List<FormSubmissionDto2> list)
 	{
