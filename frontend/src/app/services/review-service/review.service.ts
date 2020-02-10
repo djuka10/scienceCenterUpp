@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 })
 export class ReviewService {
 
-  private REVIEW_API = "http://localhost:8080/review/";
+  private REVIEW_API = "http://localhost:8088/review/";
 
   constructor(private httpClient: HttpClient) { }
 

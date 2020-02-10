@@ -54,6 +54,8 @@ public class ProcessReviewing implements JavaDelegate {
 			op.setResult("Prihvata se");
 		}
 		
+		op.setIteration(articleProcessDto.getOpinions().size());
+		
 		articleProcessDto.getOpinions().add(op);
 		execution.setVariable("articleProcessDto", articleProcessDto);
 

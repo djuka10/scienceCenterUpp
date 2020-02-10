@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 })
 export class AddTextService {
 
-  private ADDTEXT_API = "http://localhost:8080/addText";
+  private ADDTEXT_API = "http://localhost:8088/addText";
 
   constructor(private httpClient: HttpClient) { }
 

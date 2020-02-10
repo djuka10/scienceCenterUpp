@@ -106,7 +106,7 @@ public class NewArticleUpdateFormDataInitialization implements TaskListener {
 		
 		String comment = (String) execution.getVariable("analize_article_comment");
 		if(comment == null) {
-			comment = "PERO";
+			comment = "Neprikladan pdf fajl!";
 		}
 		UpdateArticleDto updateDto = new UpdateArticleDto(taskId,proccessId,new ArrayList<FormField>(),scienceAreasDto, termsDto, coAuthorsDto ,requestDto, responseDto, comment);
 		

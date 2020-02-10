@@ -1,4 +1,14 @@
 
+ <div class="col-lg-4"><label for="comment">Komentar urednika:</label></div>
+ <div class="col-lg-5">
+     <!-- <input type="text" class="form-control" name="abstract" [(ngModel)]="articleData.articleAbstract" #abstract="ngModel"
+     [ngClass]="{ 'is-invalid': f.submitted && abstract.invalid }" required /> -->
+     <textarea rows="3" class="form-control" name="comment" >{{update.comment}}
+     </textarea>
+ </div>
+
+
+
 <!-- <p class="text-center">New article</p> -->
 <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit(f.value, f)" novalidate>
   
@@ -127,7 +137,7 @@
             </div>
         </div>
         <div class="col" *ngIf="field.id=='koautor'">
-            <h2 class="text-center">Koautri</h2>
+            <h2 class="text-center">Koautori</h2>
             <div class="row">
                 <div class="col-lg-5">
                     <button class="btn btn-info" (click)="activeForm = 'custom'">Dodaj svog:</button>

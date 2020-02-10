@@ -14,6 +14,7 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.form.FormField;
 import org.camunda.bpm.engine.form.TaskFormData;
+import org.camunda.bpm.engine.impl.form.type.EnumFormType;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,8 +121,17 @@ public class AddTextController {
 		
 		List<FormField> properties = tfd.getFormFields();
 		for(FormField fp : properties) {
-			System.out.println(fp.getId() + fp.getType());
+			//int i = 0;
+//			System.out.println(fp.getId() + fp.getType());
+//			if(fp.getId().equals("naucnaOblast")) {
+//				EnumFormType eft = (EnumFormType) fp.getType();
+//				Map<String, String> mapa = eft.getValues();
+//				for(ScienceAreaDto sa : requestDto.getArticleScienceAreas()) {
+//					mapa.put(Integer.toString(i), Long.toBinaryString(sa.getScienceAreaId()));
+//				}
+//			}
 			requestDto.getFormFields().add(fp);
+			
 		}
 		
 		
@@ -177,7 +187,10 @@ public class AddTextController {
 		String processInstanceId = task.getProcessInstanceId();
 		// formService.submitTaskForm(taskId, properties);
 		runtimeService.setVariable(processInstanceId, "newArticleDto", dto);
-		formService.submitTaskForm(taskId, new HashMap<String, Object>());
+		String file = "fajl";
+		String f = (String) map.get("file_choose");
+		map.put("file_choose", file);
+		formService.submitTaskForm(taskId, new HashMap<String,Object>());
 //		taskService.complete(taskId);
 
 		
@@ -345,6 +358,8 @@ public class AddTextController {
 		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
 		String processInstanceId = task.getProcessInstanceId();
 		runtimeService.setVariable(processInstanceId, "daLiSePrihvata", dto);
+		//runtimeService.setVariable(processInstanceId, "analize_article_comment", map.get("komentar"));
+		
 		
 		
 		
@@ -377,7 +392,7 @@ public class AddTextController {
 		
 					
 		UpdateArticleDto requestDto = (UpdateArticleDto) runtimeService.getVariable(proccessInstanceId, "updateArticleRequestDto");
-		runtimeService.removeVariable(proccessInstanceId, "updateArticleRequestDto");
+		//runtimeService.removeVariable(proccessInstanceId, "updateArticleRequestDto");
 		
 		TaskFormData tfd = formService.getTaskFormData(requestDto.getTaskId());
 		
@@ -422,7 +437,7 @@ public class AddTextController {
 		
 					
 		UpdateArticleChangesDto requestDto = (UpdateArticleChangesDto) runtimeService.getVariable(proccessInstanceId, "updateArticleChangesDto");
-		//runtimeService.removeVariable(proccessInstanceId, "updateArticleChangesDto");
+		runtimeService.removeVariable(proccessInstanceId, "updateArticleChangesDto");
 		
 		TaskFormData tfd = formService.getTaskFormData(requestDto.getTaskId());
 		

@@ -200,35 +200,58 @@ export class AddTextComponent implements OnInit {
     
   }
 
-  onSubmit(value, form){
-    console.log(this.articleData);
-    console.log(this.taskId);
+  valid(value): boolean {
 
     let o = new Array();
     for (var property in value) {
       console.log(property);
       console.log(value[property]);
-      //if file, staviti ono iz 
-      if(property == "file_choose") {
-        o.push({fieldId : property, fieldValue : this.articleData.file});
-        alert("FILE: " + this.articleData.file);
-      } else
-        o.push({fieldId : property, fieldValue : value[property]});
-    }
+       if(value[property] == "") {
+          return false;
+       }
+     }
+    return true;
+    
+  }
 
-    o.push({fieldId : "koautor", fieldValue : this.articleData.articleCoAuthors})
-    o.push({fieldId : "kljucniPojmovi", fieldValue : this.articleData.articleTerm})
+  onSubmit(value, form){
+    console.log(this.articleData);
+    console.log(this.taskId);
 
-    let x = this.addTextService.postNewArticle(o, this.taskId);
+    var p = this.valid(value);
+     alert("P : " + p);
+     if(p == false) {
+      alert("Unesite sva polja !!!"); 
+     } else {
+      let o = new Array();
+      for (var property in value) {
+        console.log(property);
+        console.log(value[property]);
+        //if file, staviti ono iz 
+        if(property == "file_choose") {
+          o.push({fieldId : property, fieldValue : this.articleData.file});
+          alert("FILE: " + this.articleData.file);
+        } else
+          o.push({fieldId : property, fieldValue : value[property]});
+      }
+  
+      o.push({fieldId : "koautor", fieldValue : this.articleData.articleCoAuthors})
+      o.push({fieldId : "kljucniPojmovi", fieldValue : this.articleData.articleTerm})
+  
+      let x = this.addTextService.postNewArticle(o, this.taskId);
+  
+      x.subscribe(res => {
+        console.log(res);
+  
+       // this.toastrService.success('New article published! You will be informed for the further instructions.');
+        this.router.navigate(['']);
+      }, err => {
+  
+      });
+     }
 
-    x.subscribe(res => {
-      console.log(res);
 
-     // this.toastrService.success('New article published! You will be informed for the further instructions.');
-      this.router.navigate(['']);
-    }, err => {
-
-    });
+    
   }
 
   
