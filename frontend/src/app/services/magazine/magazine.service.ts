@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 })
 export class MagazineService {
 
-  private MAGAZINEAPI = "http://localhost:8088/magazine/";
+  private MAGAZINEAPI = "https://localhost:8088/magazine/";
 
   constructor(private httpClient: HttpClient) { }
 

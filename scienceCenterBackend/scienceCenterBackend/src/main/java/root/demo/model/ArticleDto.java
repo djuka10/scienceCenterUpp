@@ -37,5 +37,19 @@ public class ArticleDto implements Serializable {
 	
 	private String file;
 	//file, doi, edition, status
+	
+	private String doi;
+	
+	public ArticleDto(Long articleId, String articleTitle, String articleAbstract, Date publishingDate, Float price,
+			String file, String doi) {
+		super();
+		this.articleId = articleId;
+		this.articleTitle = articleTitle;
+		this.articleAbstract = articleAbstract;
+		this.publishingDate = publishingDate;
+		this.price = price;
+		this.file = file;
+		this.doi = doi;
+	}
 
 }

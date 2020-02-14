@@ -1,3 +1,4 @@
+import { Cart } from './../../model/shoppingcart';
 import { Injectable } from '@angular/core';
 
 const TOKEN_KEY = 'AuthToken';
@@ -100,6 +101,31 @@ export class TokenStorageService {
 
   public isLogged(): boolean {
     return this.getToken() ? true : false;
+  }
+
+  public getCart() : Cart{
+    let cart = window.sessionStorage.getItem('cart');
+    return JSON.parse(cart);
+    
+  }
+
+  public hasCart() : any {
+    let cart = window.sessionStorage.getItem('cart');
+    return cart;    
+  }
+
+  public setCart(cart: Cart) {
+    window.sessionStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  public addCart() : Cart {
+    
+    return new Cart();
+  }
+
+  public removeCart() {
+    window.sessionStorage.removeItem('cart');
+    
   }
 
 }

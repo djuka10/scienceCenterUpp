@@ -77,7 +77,7 @@ public class ReviewingEditorDataInitialization implements TaskListener {
 		String document = encoded;
 
 		ArticleDto articleDto = new ArticleDto(delegateTask.getId(), execution.getProcessInstanceId(), article.getArticleId(), article.getArticleTitle(), article.getArticleAbstract(), 
-				scienceAreaDto, article.getPublishingDate(), authorDto, coAuthorsDto, termsDto, article.getArticlePrice(), document);
+				scienceAreaDto, article.getPublishingDate(), authorDto, coAuthorsDto, termsDto, article.getArticlePrice(), document,"");
 		
 		Set<ScienceArea> scienceAreas = magazine.getScienceAreas();
 		List<ScienceAreaDto> scienceAreasDto = new ArrayList<ScienceAreaDto>();

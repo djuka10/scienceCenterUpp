@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class TaskService {
 
-  private TASKAPI = "http://localhost:8088/task/";
+  private TASKAPI = "https://localhost:8088/task/";
 
 
   constructor(private httpClient: HttpClient, private tokenStorageService: TokenStorageService) { }

@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   login(credentials: AuthLoginInfo): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>("http://localhost:8088/user/login", credentials, httpOptions);
+    return this.http.post<JwtResponse>("https://localhost:8088/user/login", credentials, httpOptions);
   }
 
  /* signUp(info: SignUpInfo): Observable<any> {

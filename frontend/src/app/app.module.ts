@@ -1,13 +1,15 @@
+import { HttpModule } from '@angular/http';
+import { NgModule, InjectionToken } from '@angular/core';
+
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, ActivatedRouteSnapshot } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { UpdateArticleChanges } from './model/update-article-changes-dto';
 import { ViewMagazineComponent } from './view-magazine/view-magazine.component';
 import { ViewMagazinesComponent } from './view-magazines/view-magazines.component';
 import { Globals } from './guard/globals';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
+
 
 import { AppComponent } from './app.component';
 
@@ -37,6 +39,14 @@ import { ReviewArticleComponent } from './review-article/review-article.componen
 import { ReviewArticleByEditorComponent } from './review-article-by-editor/review-article-by-editor.component';
 import { UpdateChangesComponent } from './update-changes/update-changes.component';
 import { AddReviewerWhenErrorComponent } from './add-reviewer-when-error/add-reviewer-when-error.component';
+import { SuccesPageComponent } from './succes-page/succes-page.component';
+import { FailedPageComponent } from './failed-page/failed-page.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { UserTxComponent } from './user-tx/user-tx.component';
+import { CartComponent } from './cart/cart.component';
+import { ViewMagazineEditionComponent } from './view-magazine-edition/view-magazine-edition.component';
+
+const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver');
 
 const ChildRoutes =
   [
@@ -140,6 +150,23 @@ const Routes = [
   },
   {
     path: 'add-review-when-error/:taskId', component: AddReviewerWhenErrorComponent,
+  }, 
+  {
+    path: 'magazine-edition/:id', component: ViewMagazineEditionComponent
+  },
+  {
+    path: 'cart', component: CartComponent
+  },
+  {
+    path: 'externalRedirect',
+    resolve: {
+        url: externalUrlProvider,
+    },
+    // We need a component here because we cannot define the route otherwise
+    component: ErrorPageComponent,
+  },
+  {
+    path: '**', component: ErrorPageComponent
   }
   
   
@@ -173,7 +200,13 @@ const Routes = [
     ReviewArticleComponent,
     ReviewArticleByEditorComponent,
     UpdateChangesComponent,
-    AddReviewerWhenErrorComponent
+    AddReviewerWhenErrorComponent,
+    SuccesPageComponent,
+    FailedPageComponent,
+    ErrorPageComponent,
+    UserTxComponent,
+    CartComponent,
+    ViewMagazineEditionComponent
   ],
   imports: [
     BrowserModule,
@@ -187,7 +220,14 @@ const Routes = [
     Admin,
     Authorized,
     Notauthorized,
-    Globals
+    Globals,
+    {
+      provide: externalUrlProvider,
+      useValue: (route: ActivatedRouteSnapshot) => {
+          const externalUrl = route.paramMap.get('externalUrl');
+          window.open(externalUrl, '_self');
+      }
+    }
     ],
   bootstrap: [AppComponent]
 })

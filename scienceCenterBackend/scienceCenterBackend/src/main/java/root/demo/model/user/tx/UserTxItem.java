@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -60,5 +61,16 @@ public class UserTxItem {
 	@ManyToOne
 	@JoinColumn(name = "edition_id")
 	private MagazineEdition purhasedMagazineEdition;
+	
+	@Column
+	private Long itemId;
 
+	
+	public UserTxItem(Float price, UserTx userTx, BuyingType buyingType, Long itemId) {
+		super();
+		this.price = price;
+		this.userTx = userTx;
+		this.buyingType = buyingType;
+		this.itemId = itemId;
+	}
 }

@@ -1,3 +1,4 @@
+import { TestService } from './../services/test/test.service';
 import { Magazine } from './../model/magazine';
 
 
@@ -16,10 +17,12 @@ export class ViewMagazineComponent implements OnInit {
 
   private magazine: Magazine;
   private isLogged: boolean;
+  private editions: any[];
 
-
-  constructor(private activatedRoute: ActivatedRoute, private magazineService: MagazineService, private router: Router,
-    private tokenStorageService: TokenStorageService) { }
+  constructor(private activatedRoute: ActivatedRoute, private magazineService: MagazineService, 
+    private router: Router,
+    private tokenStorageService: TokenStorageService,
+    private testService: TestService) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(data => {
@@ -33,6 +36,9 @@ export class ViewMagazineComponent implements OnInit {
           console.log(res);
           this.magazine = res;
 
+          this.testService.getAllEditions(+magazineId).subscribe(data => {
+            this.editions = data;
+          });
         
         },
         err => {
@@ -46,8 +52,8 @@ export class ViewMagazineComponent implements OnInit {
     this.router.navigate(['add-text', this.magazine.magazineId])
   }
 
-  viewEditions(){
-
+  viewEdition(id: string){
+    this.router.navigate(['magazine-edition', id]);
   }
 
   subscribe(){

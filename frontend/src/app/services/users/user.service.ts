@@ -14,16 +14,16 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   fetchUsers() {
-    return this.httpClient.get("http://localhost:8088/user/fetch") as Observable<any>;
+    return this.httpClient.get("https://localhost:8088/user/fetch") as Observable<any>;
   }
 
   //unos osnovnih podataka
   registerUser(user, taskId) {
-    return this.httpClient.post("http://localhost:8088/welcome/post/mainData/".concat(taskId), user) as Observable<any>;
+    return this.httpClient.post("https://localhost:8088/welcome/post/mainData/".concat(taskId), user) as Observable<any>;
   }
   //unos naucnih oblasti
   scienceArea(science,taskId) {
-    return this.httpClient.post("http://localhost:8088/welcome/post/sciencearea/".concat(taskId), science) as Observable<any>;
+    return this.httpClient.post("https://localhost:8088/welcome/post/sciencearea/".concat(taskId), science) as Observable<any>;
   }
 
   

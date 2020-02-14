@@ -247,7 +247,7 @@ public class AddTextController {
 				authorDto, 
 				coAuthorsDto, 
 				termsDto, 
-				article.getArticlePrice(), null);
+				article.getArticlePrice(), null, "");
 		
         return new ResponseEntity<ArticleDto>(articleDto, HttpStatus.OK);
     }
@@ -423,8 +423,8 @@ public class AddTextController {
 		String processInstanceId = task.getProcessInstanceId();
 		// formService.submitTaskForm(taskId, properties);
 		runtimeService.setVariable(processInstanceId, "newArticleDto", dto);
-//		formService.submitTaskForm(taskId, new HashMap<String, Object>());
-		taskService.complete(taskId);
+		formService.submitTaskForm(taskId, new HashMap<String, Object>());
+//		taskService.complete(taskId);
 
 		
         return new ResponseEntity<>(HttpStatus.OK);

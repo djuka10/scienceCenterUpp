@@ -18,7 +18,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -85,11 +84,24 @@ public class Article {
 	@Column
 	private String doi;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "magazine_edition_id")
 	private MagazineEdition magazineEdition;
 	
 	@Column
 	private Float articlePrice;
+	
+	public Article(String articleTitle, String articleAbstract, Date publishingDate, byte[] file, String fileFormat,
+			String doi, MagazineEdition magazineEdition, Float articlePrice) {
+		super();
+		this.articleTitle = articleTitle;
+		this.articleAbstract = articleAbstract;
+		this.publishingDate = publishingDate;
+		this.file = file;
+		this.fileFormat = fileFormat;
+		this.doi = doi;
+		this.magazineEdition = magazineEdition;
+		this.articlePrice = articlePrice;
+	}
 
 }

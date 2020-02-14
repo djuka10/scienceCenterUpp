@@ -61,7 +61,7 @@ public class AddReviewerForArticleDataInitialization implements TaskListener {
 		UserDto authorDto = new UserDto(author.getId(), author.getFirstName(), author.getLastName(), author.getMail(), author.getCity(), author.getCountry(), author.getUsername(), author.getTitle());
 		
 		ArticleDto articleDto = new ArticleDto(delegateTask.getId(), execution.getProcessInstanceId(), article.getArticleId(), article.getArticleTitle(), article.getArticleAbstract(), 
-				scienceAreaDto, article.getPublishingDate(), authorDto, coAuthorsDto, null, null, null);
+				scienceAreaDto, article.getPublishingDate(), authorDto, coAuthorsDto, null, null, null,"");
 		
 		Set<ScienceArea> scienceAreas = magazine.getScienceAreas();
 		List<ScienceAreaDto> scienceAreasDto = new ArrayList<ScienceAreaDto>();

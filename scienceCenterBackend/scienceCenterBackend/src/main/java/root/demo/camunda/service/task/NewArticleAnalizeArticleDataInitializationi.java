@@ -67,7 +67,7 @@ public class NewArticleAnalizeArticleDataInitializationi implements TaskListener
 				authorDto, 
 				coAuthorsDto, 
 				termsDto, 
-				article.getArticlePrice(), null);
+				article.getArticlePrice(), null,"");
 		
 		execution.setVariable("perodeformero", articleDto);
 		execution.setVariable("articleRequestDto", articleDto);

@@ -143,7 +143,7 @@
     <bpmn:boundaryEvent id="IntermediateThrowEvent_1sondr6" name="Cekanje da autor promeni format PDF-a" attachedToRef="korigovanje">
       <bpmn:outgoing>SequenceFlow_1blli9f</bpmn:outgoing>
       <bpmn:timerEventDefinition>
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT20M</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT1M</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1blli9f" name="Ukoliko autor ne azurira prijavu u zadatom vremenskom periodu" sourceRef="IntermediateThrowEvent_1sondr6" targetRef="ServiceTask_0r62dxq" />

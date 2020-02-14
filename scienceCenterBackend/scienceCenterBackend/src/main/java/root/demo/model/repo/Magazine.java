@@ -19,7 +19,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -98,6 +97,36 @@ public class Magazine {
 	
 	@ManyToMany
 	private Set<MyUser> editors; //urednici
+	
+	@Column
+	private Long sellerIdentifier;
+	
+	@Column
+	private Double price;
+	
+	public Magazine(String iSSN, String name, WayOfPayment wayOfPayment, boolean active,
+			Long sellerIdentifier, Double price) {
+		super();
+		this.magazineId = magazineId;
+		username = iSSN;
+		this.name = name;
+		this.wayOfPayment = wayOfPayment;
+		this.active = active;
+		this.sellerIdentifier = sellerIdentifier;
+		this.price = price;
+	}
+	
+	public Magazine(Long magazineId, String iSSN, String name, WayOfPayment wayOfPayment, boolean active,
+			Long sellerIdentifier, Double price) {
+		super();
+		this.magazineId = magazineId;
+		username = iSSN;
+		this.name = name;
+		this.wayOfPayment = wayOfPayment;
+		this.active = active;
+		this.sellerIdentifier = sellerIdentifier;
+		this.price = price;
+	}
 	
 //	@Column
 //	private String kindOfPay;

@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,6 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder(toBuilder = true)
 public class MagazineEdition {
 
 	@Id
@@ -52,6 +52,13 @@ public class MagazineEdition {
 	
 	@OneToMany(mappedBy = "magazineEdition", fetch= FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Article> articles;
+	
+	public MagazineEdition(Date publishingDate, Float magazineEditionPrice, Magazine magazine) {
+		super();
+		this.publishingDate = publishingDate;
+		this.magazineEditionPrice = magazineEditionPrice;
+		this.magazine = magazine;
+	}
 
 	
 }

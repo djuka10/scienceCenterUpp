@@ -44,5 +44,18 @@
             </tbody>
           </table>  
       </div>
+
+
+      <div *ngIf="editions">
+        <section class="container content-section">
+          <h2 class="section-header">Magazine editions</h2>
+          <div class="shop-items">
+              <div class="shop-item">
+                <button *ngFor="let edition of editions" (click)="viewEdition(edition.magazineEditionId)"  class="list-group-item list-group-item-action" >View edition: {{edition.magazineEditionId}}</button>
+              </div>
+          </div>
+        </section>
+      </div>
+
     </div>
 </div>

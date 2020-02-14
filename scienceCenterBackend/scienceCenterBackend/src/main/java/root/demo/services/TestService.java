@@ -9,8 +9,10 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.form.FormField;
 import org.camunda.bpm.engine.identity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import root.demo.model.FormSubmissionDto;
 import root.demo.repository.RoleRepository;
@@ -134,4 +136,39 @@ public class TestService implements JavaDelegate{
 		
 		
 	}
+	
+	public String callPaymentHub() {
+		RestTemplate restTemplate = new RestTemplate();
+
+		String[] paths = new String[] {"", "/card", "/bitcoin", "/payPal"};
+		
+		
+		for(String path : paths) {
+			ResponseEntity<String> res =  restTemplate.getForEntity("https://localhost:8762/requestHandler/test" + path, String.class);
+			System.out.println("#####################################33");
+			System.out.println(res.getBody());
+			System.out.println("#####################################33");
+
+		}
+		
+		return "RESI";
+	}
+	
+	public String callPaymentHubServices() {
+		RestTemplate restTemplate = new RestTemplate();
+
+		String[] paths = new String[] {"", "/card", "/bitcoin", "/payPal"};
+		
+		
+		for(String path : paths) {
+			ResponseEntity<String> res =  restTemplate.getForEntity("https://localhost:8762/requestHandler/service" + path, String.class);
+			System.out.println("#####################################33");
+			System.out.println(res.getBody());
+			System.out.println("#####################################33");
+		}
+		
+		return "RESI";
+	}
+	
+	
 }
